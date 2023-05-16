@@ -10,8 +10,8 @@ AgroConnect-Bangkit Capstone Project C23-PS127
 This is a project of RESTFull API using Go language and detailed tech stack below 
 | Tech          | Used as       |
 | ------------- | ------------- |
-| ExpressJs     | Framework     |
-| MySQL         | Dataabase     |
+| ExpressJS    | Framework     |
+| MySQL         | Database     |
 | Postman       | API Test Endpoint |
 
 ## API Specification
