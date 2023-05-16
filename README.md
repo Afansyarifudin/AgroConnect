@@ -7,7 +7,7 @@ AgroConnect-Bangkit Capstone Project C23-PS127
 - Run `npm install` for first initialize project after clone repo
 
 ## Description 
-This is a project of RESTFull API using Go language and detailed tech stack below 
+This is a project of NodeJS using ExpressJS framework and detailed tech stack below 
 | Tech          | Used as       |
 | ------------- | ------------- |
 | ExpressJS    | Framework     |
