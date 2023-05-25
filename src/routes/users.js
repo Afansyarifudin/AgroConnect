@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const controller = require('../controllers/users_controller')
+const auth = require('../middleware/auth');
 
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
     res.status(200).json({
         message: "Method Get User"
     });
