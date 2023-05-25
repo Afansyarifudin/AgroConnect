@@ -2,6 +2,9 @@
 const express = require('express');
 const app = express();
 const userRoutes = require('./src/routes/users');
+const categoryRoutes = require('./src/routes/categories');
+const productRoutes = require('./src/routes/products');
+const demandRoutes = require('./src/routes/demands');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
@@ -23,6 +26,10 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/users', userRoutes);
+app.use('/categories', categoryRoutes);
+app.use('/products', productRoutes);
+app.use('/demands', demandRoutes);
+
 
 // Error Handling
 app.use((req, res, next) => {
