@@ -18,6 +18,10 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 
 http://localhost:3000
 
+    Users Routes :
+	    POST("/users/register")
+		POST("/users/login")
+
     Categories Routes :
 	    GET("/categories")              
 		GET("/categories/:categoryId")     
