@@ -6,6 +6,12 @@ AgroConnect-Bangkit Capstone Project C23-PS127
 - Checkout to Branch api-dev `git checkout api-dev` 
 - Run `npm install` for first initialize project after clone repo
 
+## Run Localy 
+- Make sure you have PostgresSQL
+- Configure on `config/config.json`. Please configure like you Postgres in your local
+- Cd `src` then
+- Run ```npx sequelize-cli db:migrate```
+
 ## Description 
 This is a project of NodeJS using ExpressJS framework and detailed tech stack below 
 | Tech          | Used as       |
@@ -43,4 +49,3 @@ http://localhost:3000
 		PUT("/demands/:demandId")     
 		DELETE("/demands/:demandId")  
 
-	
