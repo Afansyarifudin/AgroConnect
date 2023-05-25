@@ -10,6 +10,7 @@ AgroConnect-Bangkit Capstone Project C23-PS127
 - Make sure you have PostgresSQL
 - Configure on `config/config.json`. Please configure like you Postgres in your local
 - Cd `src` then
+- Run ```npx sequelize-cli db:create```
 - Run ```npx sequelize-cli db:migrate```
 
 ## Description 
