@@ -9,9 +9,14 @@ controller.userRegister = async (req,res) => {
     try {
         const {username, email, password, role} = req.body;
 
-        const exixtingUser = await User.findOne({email});
+        if (!(username && email && password)) {
+            res.status(400).json({message:"username, email, and password are required"});
+        }
+
+        // validate user 
+        const exixtingUser = await User.findOne({ where: { email } });
         if (exixtingUser) {
-            return res.status(400).json({
+            return res.status(409).json({
                 message: "User already exist"
             });
         }
@@ -19,7 +24,7 @@ controller.userRegister = async (req,res) => {
         const hashedPassword = await bcryptjs.hash(password, 8);
 
         let user = new User({
-            email,
+            email: email.toLowerCase(),
             password: hashedPassword,
             username,
             role,
@@ -55,11 +60,14 @@ controller.userLogin = async (req,res) => {
         }
 
         const token = jwt.sign({
-            id: user._id
-        }, "verySecret");
+            user_id: user._id, 
+            email 
+        }, "verySecret", {
+            expiresIn: "2h",
+        });
         res.status(200).json({
-            token,
-            ...user._doc
+            token
+            // ...user._doc
         });
 
     } catch (error) {
