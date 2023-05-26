@@ -8,6 +8,7 @@ controller.getAllDemand = async (req, res) => {
         });
 
         res.status(200).json({
+            message: "Success Get All Demands",
             data: data
         })
     } catch (error) {

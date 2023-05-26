@@ -6,6 +6,7 @@ controller.findAllCategories = async (req, res) => {
         const data = await Category.findAll();
 
         res.status(200).json({
+            message: "Success Get All Categories",
             data: data
         })
     } catch (error) {

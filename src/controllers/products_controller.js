@@ -8,6 +8,7 @@ controller.getAllProduct = async (req, res) => {
         });
 
         res.status(200).json({
+            message: "Success Get All Product",
             data: data
         });
     } catch (error) {
