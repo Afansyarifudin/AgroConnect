@@ -19,7 +19,27 @@ controller.getAllDemand = async (req, res) => {
 }
 
 controller.getDemandById = async (req, res) => {
+    try {
+        const {demandId} = req.params;
 
+        const data = await Demand.findByPk(demandId, {include: 'Category'});
+
+        if (data === null){
+            return res.status(404).json({
+                message: `Data with id ${demandId} Not Found`
+            });
+        }
+
+        res.status(200).json({
+            message: "Success Get a Demand",
+            data: data
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        });
+    }
 }
 
 controller.createDemand = async (req, res) => {

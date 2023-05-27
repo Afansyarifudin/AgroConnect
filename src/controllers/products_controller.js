@@ -19,7 +19,27 @@ controller.getAllProduct = async (req, res) => {
 }
 
 controller.getProductById = async (req, res) => {
+    try {
+        const {productId} = req.params;
 
+        const data = await Product.findByPk(productId, {include: 'Category'});
+
+        if (data === null) {
+            return res.status(404).json({
+                message: `Data with id ${productId} Not Found`
+            })
+        }
+
+        res.status(200).json({
+            message: "Success Get a Product",
+            data: data
+        });
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        })
+    }
 }
 
 controller.createProduct = async (req, res) => {
