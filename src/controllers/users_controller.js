@@ -7,6 +7,13 @@ const controller = {};
 // Register controller
 controller.userRegister = async (req,res) => {
     try {
+        // Check if Content-Type is set to JSON
+        if (req.headers['content-type'] !== 'application/json') {
+            return res.status(400).json({ 
+                error: 'Invalid content type. Only JSON is supported.' 
+            });
+        }
+
         const {username, email, password, role} = req.body;
 
         if (!(username && email && password)) {
@@ -43,6 +50,13 @@ controller.userRegister = async (req,res) => {
 
 controller.userLogin = async (req,res) => {
     try {
+        // Check if Content-Type is set to JSON
+        if (req.headers['content-type'] !== 'application/json') {
+            return res.status(400).json({ 
+                error: 'Invalid content type. Only JSON is supported.' 
+            });
+        }
+
         const {email, password} = req.body;
 
         const user = await User.findOne({email});

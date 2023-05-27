@@ -24,6 +24,13 @@ controller.getDemandById = async (req, res) => {
 
 controller.createDemand = async (req, res) => {
     try {
+        // Check if Content-Type is set to JSON
+        if (req.headers['content-type'] !== 'application/json') {
+            return res.status(400).json({ 
+                error: 'Invalid content type. Only JSON is supported.' 
+            });
+        }
+
         const {name, amount, location, category_id} = req.body;
 
         const newDemand = await Demand.create({

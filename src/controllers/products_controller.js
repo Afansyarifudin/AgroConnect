@@ -24,6 +24,13 @@ controller.getProductById = async (req, res) => {
 
 controller.createProduct = async (req, res) => {
     try {
+        // Check if Content-Type is set to JSON
+        if (req.headers['content-type'] !== 'application/json') {
+            return res.status(400).json({ 
+                error: 'Invalid content type. Only JSON is supported.' 
+            });
+        }
+
         const {name, amount, location, crop_date, estimate_exp, category_id} = req.body;
         const newProduct = await Product.create({
             name: name,
