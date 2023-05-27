@@ -18,7 +18,7 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 | Tech          | Used as       |
 | ------------- | ------------- |
 | ExpressJS    | Framework     |
-| MySQL         | Database     |
+| PostgreSQL         | Database     |
 | Postman       | API Test Endpoint |
 
 ## API Specification
