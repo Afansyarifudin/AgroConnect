@@ -9,6 +9,7 @@ controller.getAllProduct = async (req, res) => {
         });
 
         res.status(200).json({
+            status: "Ok",
             message: "Success Get All Product",
             data: data
         });
@@ -27,11 +28,13 @@ controller.getProductById = async (req, res) => {
 
         if (data === null) {
             return res.status(404).json({
+                status: "Not Found",
                 message: `Data with id ${productId} Not Found`
             })
         }
 
         res.status(200).json({
+            status: "Ok",
             message: "Success Get a Product",
             data: data
         });
@@ -63,6 +66,7 @@ controller.createProduct = async (req, res) => {
         });
 
         return res.status(201).json({
+            status: "Created",
             message: "New Product Created",
             data: newProduct
         })
@@ -74,7 +78,48 @@ controller.createProduct = async (req, res) => {
 }
 
 controller.updateProduct = async (req, res) => {
+    try {
+        // Check if Content-Type is set to JSON
+        if (req.headers['content-type'] !== 'application/json') {
+            return res.status(400).json({ 
+                error: 'Invalid content type. Only JSON is supported.' 
+            });
+        }
 
+        const {productId} = req.params;
+        const {name, amount, location, crop_date, estimate_exp, category_id} = req.body;
+
+        const oldProduct = await Product.update({
+            name: name,
+            amount: amount,
+            location: location,
+            crop_date: crop_date,
+            estimate_exp: estimate_exp,
+            category_id: category_id
+        }, 
+        {
+            where: {
+                id: productId
+            }
+        });
+
+        if (oldProduct[0] === 1) {
+            res.status(200).json({
+                status: "Ok",
+                message: "Success Update Product"
+            })
+        } else {
+            res.status(404).json({
+                status: "Not Found",
+                message: "Product Not Found"
+            })
+        }
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        });
+    }
 }
 
 controller.deleteProduct = async (req,res) => {
@@ -89,10 +134,12 @@ controller.deleteProduct = async (req,res) => {
 
         if (rowsAffected > 0) {
             return res.status(200).json({
+                status: "Ok",
                 message: "Success Delete Product"
             });
         } else {
             return res.status(404).json({
+                status: "Not Found",
                 message: "Product Not Found"
             });
         }

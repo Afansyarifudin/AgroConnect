@@ -8,6 +8,7 @@ controller.getAllDemand = async (req, res) => {
         });
 
         res.status(200).json({
+            status: "Ok",
             message: "Success Get All Demands",
             data: data
         })
@@ -26,11 +27,13 @@ controller.getDemandById = async (req, res) => {
 
         if (data === null){
             return res.status(404).json({
+                status: "Not Found",
                 message: `Data with id ${demandId} Not Found`
             });
         }
 
         res.status(200).json({
+            status: "Ok",
             message: "Success Get a Demand",
             data: data
         });
@@ -61,6 +64,7 @@ controller.createDemand = async (req, res) => {
         })
 
         return res.status(201).json({
+            status: "Created",
             message: "New Demand Created",
             data: newDemand
         })
@@ -71,7 +75,46 @@ controller.createDemand = async (req, res) => {
 }
 
 controller.updateDemand = async (req, res) => {
+    try {
+        // Check if Content-Type is set to JSON
+        if (req.headers['content-type'] !== 'application/json') {
+            return res.status(400).json({ 
+                error: 'Invalid content type. Only JSON is supported.' 
+            });
+        }
 
+        const {demandId} = req.params;
+        const {name, amount, location, category_id} = req.body;
+
+        const oldDemand = await Demand.update({
+            name: name,
+            amount: amount,
+            location: location,
+            category_id: category_id
+        },
+        {
+            where: {
+                id: demandId
+            }
+        });
+
+        if (oldDemand[0] === 1) {
+            res.status(200).json({
+                status: "Ok",
+                message: "Success Update Demand"
+            })
+        } else {
+            res.status(404).json({
+                status: "Not Found",
+                message: "Demand Not Found"
+            })
+        }
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        });
+    }
 }
 
 controller.deleteDemand = async (req,res) => {
@@ -86,10 +129,12 @@ controller.deleteDemand = async (req,res) => {
 
         if (rowsAffected > 0) {
             return res.status(200).json({
+                status: "Ok",
                 message: "Success Delete Demand"
             });
         } else {
             return res.status(404).json({
+                status: "Not Found",
                 message: "Demand Not Found"
             });
         }
