@@ -1,5 +1,6 @@
 package com.example.agroconnect
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.agroconnect.databinding.ActivityMainBinding
@@ -14,5 +15,10 @@ class TradeActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivityTradeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.backButton.setOnClickListener{
+            val mainActivity = Intent(this, MainActivity::class.java)
+            startActivity(mainActivity)
+        }
     }
 }

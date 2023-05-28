@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.tvUsername.apply {  }
+
         binding.tvTradehistory.setOnClickListener{
             val tradeActivity = Intent(this, TradeActivity::class.java)
             startActivity(tradeActivity)
