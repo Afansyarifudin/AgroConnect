@@ -60,7 +60,7 @@ controller.createDemand = async (req, res) => {
             category_id: category_id
         })
 
-        res.status(201).json({
+        return res.status(201).json({
             message: "New Demand Created",
             data: newDemand
         })
@@ -75,7 +75,30 @@ controller.updateDemand = async (req, res) => {
 }
 
 controller.deleteDemand = async (req,res) => {
-    
+    try {
+        const {demandId} = req.params;
+
+        const rowsAffected = await Demand.destroy({
+            where: {
+                id: demandId
+            }
+        });
+
+        if (rowsAffected > 0) {
+            return res.status(200).json({
+                message: "Success Delete Demand"
+            });
+        } else {
+            return res.status(404).json({
+                message: "Demand Not Found"
+            });
+        }
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        });
+    }
 }
 
 

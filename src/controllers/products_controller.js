@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const {Product} = require('../models');
 const controller = {};
 
@@ -61,7 +62,7 @@ controller.createProduct = async (req, res) => {
             category_id:category_id
         });
 
-        res.status(201).json({
+        return res.status(201).json({
             message: "New Product Created",
             data: newProduct
         })
@@ -77,7 +78,30 @@ controller.updateProduct = async (req, res) => {
 }
 
 controller.deleteProduct = async (req,res) => {
-    
+    try {
+        const {productId} = req.params;
+
+        const rowsAffected = await Product.destroy({
+            where: {
+                id: productId
+            }
+        });
+
+        if (rowsAffected > 0) {
+            return res.status(200).json({
+                message: "Success Delete Product"
+            });
+        } else {
+            return res.status(404).json({
+                message: "Product Not Found"
+            });
+        }
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        });
+    }
 }
 
 
