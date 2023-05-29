@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const controller = require('../controllers/categories_controller')
+const controller = require('../controllers/categories_controller');
+const auth = require('../middleware/auth');
 
 router.get('/', controller.findAllCategories);      //get all categories
 router.get('/:categoryId', controller.getBookById);         //get category by id 

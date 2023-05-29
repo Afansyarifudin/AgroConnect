@@ -5,7 +5,7 @@ const controller = {};
 controller.getAllProduct = async (req, res) => {
     try {
         const data = await Product.findAll({
-            include: 'Category'
+            include: ['Category', 'User']
         });
 
         res.status(200).json({
@@ -24,7 +24,7 @@ controller.getProductById = async (req, res) => {
     try {
         const {productId} = req.params;
 
-        const data = await Product.findByPk(productId, {include: 'Category'});
+        const data = await Product.findByPk(productId, {include: ['Category', 'User']});
 
         if (data === null) {
             return res.status(404).json({
@@ -55,6 +55,8 @@ controller.createProduct = async (req, res) => {
             });
         }
 
+        console.log(req.user_id);
+
         const {name, amount, location, crop_date, estimate_exp, category_id} = req.body;
         const newProduct = await Product.create({
             name: name,
@@ -62,7 +64,8 @@ controller.createProduct = async (req, res) => {
             location: location,
             crop_date: crop_date,
             estimate_exp: estimate_exp,
-            category_id:category_id
+            category_id:category_id,
+            user_id: req.user.user_id
         });
 
         return res.status(201).json({
@@ -86,8 +89,11 @@ controller.updateProduct = async (req, res) => {
             });
         }
 
+        console.log(req.user.user_id);
+
         const {productId} = req.params;
         const {name, amount, location, crop_date, estimate_exp, category_id} = req.body;
+        const {userId} = req.user.user_id;
 
         const oldProduct = await Product.update({
             name: name,
@@ -104,15 +110,15 @@ controller.updateProduct = async (req, res) => {
         });
 
         if (oldProduct[0] === 1) {
-            res.status(200).json({
+            return res.status(200).json({
                 status: "Ok",
                 message: "Success Update Product"
             })
         } else {
-            res.status(404).json({
+            return res.status(404).json({
                 status: "Not Found",
                 message: "Product Not Found"
-            })
+            });
         }
 
     } catch (error) {

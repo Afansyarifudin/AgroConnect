@@ -4,7 +4,7 @@ const controller = {};
 controller.getAllDemand = async (req, res) => {
     try {
         const data = await Demand.findAll({
-            include: 'Category'
+            include: ['Category', 'User']
         });
 
         res.status(200).json({
@@ -23,7 +23,7 @@ controller.getDemandById = async (req, res) => {
     try {
         const {demandId} = req.params;
 
-        const data = await Demand.findByPk(demandId, {include: 'Category'});
+        const data = await Demand.findByPk(demandId, {include: ['Category', 'User']});
 
         if (data === null){
             return res.status(404).json({
@@ -60,7 +60,8 @@ controller.createDemand = async (req, res) => {
             name: name,
             amount: amount,
             location: location,
-            category_id: category_id
+            category_id: category_id,
+            user_id: req.user.user_id
         })
 
         return res.status(201).json({
@@ -90,7 +91,8 @@ controller.updateDemand = async (req, res) => {
             name: name,
             amount: amount,
             location: location,
-            category_id: category_id
+            category_id: category_id,
+            user_id: req.user.user_id
         },
         {
             where: {

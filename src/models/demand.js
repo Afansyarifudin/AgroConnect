@@ -11,14 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Demand.belongsTo(models.Category, {foreignKey:'category_id'})
+      Demand.belongsTo(models.Category, {foreignKey:'category_id'});
+      Demand.belongsTo(models.User, {foreignKey:'user_id'});
     }
   }
   Demand.init({
     name: DataTypes.STRING,
     amount: DataTypes.INTEGER,
     location: DataTypes.STRING,
-    category_id: DataTypes.INTEGER
+    category_id: DataTypes.INTEGER,
+    user_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Demand',
