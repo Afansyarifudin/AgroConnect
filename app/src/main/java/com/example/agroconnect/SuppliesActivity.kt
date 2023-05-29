@@ -15,5 +15,10 @@ class SuppliesActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivitySuppliesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.backButton.setOnClickListener{
+            val mainActivity = Intent(this, MainActivity::class.java)
+            startActivity(mainActivity)
+        }
     }
 }
