@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "agro_connect_dev",
-    "host": "127.0.0.1",
+    "host": "localhost", 
     "dialect": "postgres"
   },
   "test": {
