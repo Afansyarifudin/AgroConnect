@@ -4,7 +4,7 @@ AgroConnect is an innovative mobile application designed to connect farmers (sup
 
 ## Features
 
-COMING SOOM
+COMING SOON
 
 ## Installation
 
@@ -47,4 +47,4 @@ COMING SOON
 
 ## About
 
-AgroConnect is developed and maintained by [Your Name](COMING SOON). Connect with us on [Twitter](COMING SOON) for updates and announcements.
+AgroConnect mobile is developed and maintained by [Fauzan Ali Vijsma](COMING SOON). Connect with us on [Twitter](COMING SOON) for updates and announcements.
