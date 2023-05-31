@@ -1,13 +1,8 @@
 {
   "development": {
     "username": "postgres",
-<<<<<<< HEAD
     "password": "",
     "database": "agro_connect_dev",
-=======
-    "password": "postgres",
-    "database": "agroconnect_db",
->>>>>>> 1e28adfbb896d4bf91c70225ad89ab2b77fde570
     "host": "localhost", 
     "dialect": "postgres"
   },
