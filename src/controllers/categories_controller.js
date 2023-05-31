@@ -16,14 +16,23 @@ controller.findAllCategories = async (req, res) => {
     }
 }
 
-controller.getBookById = async (req, res) => {
+controller.getCategoryById = async (req, res) => {
     try {
+        const {categoryId} = req.params;
+        
         const data = await Category.findOne({
             where: {
-                id: req.params
+                id: categoryId
             }
         });
 
+        if (data === null){
+            return res.status(404).json({
+                status: "Not Found",
+                message: `Data with id ${categoryId} Not Found`
+            });
+        }
+        
         res.status(200).json({
             message: "Success Get Category By Id",
             data: data
