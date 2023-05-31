@@ -74,7 +74,7 @@ controller.userLogin = async (req,res) => {
         }
 
         const token = jwt.sign({
-            user_id: user._id, 
+            user_id: user.id, 
             email 
         }, "verySecret", {
             expiresIn: "2h",

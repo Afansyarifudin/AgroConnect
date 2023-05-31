@@ -20,7 +20,7 @@ controller.getBookById = async (req, res) => {
     try {
         const data = await Category.findOne({
             where: {
-                id: req.params.id
+                id: req.params
             }
         });
 
