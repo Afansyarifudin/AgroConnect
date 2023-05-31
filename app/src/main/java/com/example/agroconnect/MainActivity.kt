@@ -53,14 +53,15 @@ class MainActivity : AppCompatActivity() {
             dialog.setContentView(dialogBinding.root)
 
             dialogBinding.btnCreateSupplies.setOnClickListener {
-                val suppliesIntent = Intent(this, SuppliesActivity::class.java)
-                startActivity(suppliesIntent)
+                val demandIntent = Intent(this, DemandActivity::class.java)
+                startActivity(demandIntent)
                 dialog.dismiss()
             }
 
             dialogBinding.btnCreateDemand.setOnClickListener {
-                val demandIntent = Intent(this, DemandActivity::class.java)
-                startActivity(demandIntent)
+                val suppliesIntent = Intent(this, SuppliesActivity::class.java)
+                startActivity(suppliesIntent)
+
                 dialog.dismiss()
             }
 

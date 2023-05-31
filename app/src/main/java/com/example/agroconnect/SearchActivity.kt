@@ -1,9 +1,12 @@
 package com.example.agroconnect
 
+import android.R
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import com.example.agroconnect.databinding.ActivitySearchBinding
 import com.example.agroconnect.databinding.ActivityTradeBinding
 
@@ -16,6 +19,13 @@ class SearchActivity : AppCompatActivity() {
         supportActionBar?.hide()
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val options = arrayOf("Select category", "Vegetables & Fruits", "Peanuts", "Sembako")
+        val spinner: Spinner = binding.spinnerFind
+        val adapter: ArrayAdapter<String> =
+            ArrayAdapter(this, R.layout.simple_spinner_dropdown_item, options)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinner.adapter = adapter
 
         val isDemand = intent.getBooleanExtra("isDemand", false)
 
