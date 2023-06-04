@@ -14,10 +14,11 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "postgres",
+    "password": "agroconnect",
+    "database": "agroconnect_db",
+    "host": "34.128.87.179",
     "dialect": "postgres"
   }
 }
+

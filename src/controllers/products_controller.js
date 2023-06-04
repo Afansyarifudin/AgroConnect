@@ -1,4 +1,3 @@
-const { where } = require('sequelize');
 const {Product} = require('../models');
 const controller = {};
 
@@ -156,6 +155,5 @@ controller.deleteProduct = async (req,res) => {
         });
     }
 }
-
 
 module.exports = controller;
