@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "postgres",
-    "password": "postgres",
+    "password": "admin123",
     "database": "agroconnect_db",
-    "host": "localhost", 
+    "host": "34.128.110.93", 
     "dialect": "postgres"
   },
   "test": {

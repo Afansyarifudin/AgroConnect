@@ -57,6 +57,8 @@ controller.userLogin = async (req,res) => {
             });
         }
 
+        const data = await User.findAll();
+
         const {email, password} = req.body;
 
         const user = await User.findOne({email});
@@ -80,8 +82,10 @@ controller.userLogin = async (req,res) => {
             expiresIn: "2h",
         });
         res.status(200).json({
+            data,
             token
             // ...user._doc
+
         });
 
     } catch (error) {
