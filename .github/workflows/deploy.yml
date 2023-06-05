@@ -21,21 +21,29 @@
                 project_id: capstone-c23-ps127
                 service_account_key: ${{secrets.GCLOUD_AUTH}}
 
-        #   - name: Configure Docker to use gcloud 
-        #     run: |
-        #         gcloud auth configure-docker asia-southeast2-docker.pkg.dev --quiet
+          - name: Configure Docker to use gcloud 
+            run: |
+                gcloud auth configure-docker asia-southeast2-docker.pkg.dev --quiet
+
+          - name: Set Environment Variables
+            run: |
+                echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
+                echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
+                echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> $GITHUB_ENV
+                echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
+                echo "DB_DIALECT=${{ secrets.DB_DIALECT }}" >> $GITHUB_ENV
             
-        #   - name: Build and Push Docker Image 
-        #     run: |
-        #         export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
-        #         export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:${IMAGE_TAG}
-        #         docker build -t ${IMAGE_NAME} .
-        #         docker push ${IMAGE_NAME}
+          - name: Build and Push Docker Image 
+            run: |
+                export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
+                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:${IMAGE_TAG}
+                docker build -t ${IMAGE_NAME} .
+                docker push ${IMAGE_NAME}
 
           - name: Deploy to Cloud Run
             run: |
                 export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
-                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:v1.2.0
+                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:${IMAGE_TAG}
                 gcloud run deploy agroconnect-api --image ${IMAGE_NAME} --region asia-southeast2 --allow-unauthenticated
             # env:
             #     CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
