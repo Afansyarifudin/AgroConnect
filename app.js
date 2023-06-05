@@ -25,7 +25,7 @@ app.use('/products', productRoutes);
 app.use('/demands', demandRoutes);
 
 
-// Error Handling
+// Error Handling for enpoint not found
 app.use((req, res, next) => {
     const error = new Error('Endpoint Not Found');
     error .status = 404;
