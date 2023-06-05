@@ -1,0 +1,8 @@
+Flask==2.3.2
+numpy==1.21.0
+pandas==2.0.2
+jsonify==0.5
+matplotlib==3.7.1
+scikit-learn==1.2.2
+geopy==2.3.0
+requests==2.24.0
