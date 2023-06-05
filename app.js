@@ -8,13 +8,6 @@ const demandRoutes = require('./src/routes/demands');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-// app.use('/', (req, res, next) => {
-//     res.status(200).json({
-//         message:"AgroConnect API Success"
-//     });
-// });
-
-
 // Request Logs Store in Morgan 
 app.use(morgan('dev'));
 
