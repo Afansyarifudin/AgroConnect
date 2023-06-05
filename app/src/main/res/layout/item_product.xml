@@ -1,33 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- item_product.xml -->
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/btn_supItems"
+    android:layout_marginBottom="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp"
-    android:orientation="vertical"
-    android:background="#87CEEB">
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
 
-    <TextView
-        android:id="@+id/nameTextView"
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="4dp" />
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
 
-    <TextView
-        android:id="@+id/amountTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:layout_marginBottom="2dp" />
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:fontFamily="@font/nunito"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/locationTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/amountTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito"
+
+            android:text="Amount"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+        <TextView
+            android:id="@+id/locationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/nunito"
+
+            android:text="Location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </LinearLayout>
 
 </LinearLayout>
 
