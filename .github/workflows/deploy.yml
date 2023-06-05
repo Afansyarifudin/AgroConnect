@@ -34,6 +34,8 @@
 
           - name: Deploy to Cloud Run
             run: |
+                export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
+                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:${IMAGE_TAG}
                 gcloud run deploy agroconnect-api --image ${IMAGE_NAME} --region asia-southeast2 --allow-unauthenticated
             env:
                 CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
