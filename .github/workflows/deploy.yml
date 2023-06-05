@@ -17,8 +17,7 @@
         
           - name: Set Up Cloud SDK
             uses: 'google-github-actions/setup-gcloud@v1'
-            with:
-                version: '>= 416.0.0' 
+            with: 
                 project_id: capstone-c23-ps127
                 service_account_key: ${{secrets.GCLOUD_AUTH}}
 
