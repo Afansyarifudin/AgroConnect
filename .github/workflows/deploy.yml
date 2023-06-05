@@ -28,7 +28,7 @@
           - name: Build and Push Docker Image 
             run: |
                 export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
-                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127//agroconnect/agroconnect-api:${IMAGE_TAG}
+                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:${IMAGE_TAG}
                 docker build -t ${IMAGE_NAME} .
                 docker push ${IMAGE_NAME}
 
