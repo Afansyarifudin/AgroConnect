@@ -37,7 +37,12 @@
             run: |
                 export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
                 export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect/agroconnect-api:${IMAGE_TAG}
-                docker build -t ${IMAGE_NAME} .
+                docker build  --build-arg DB_USERNAME=$DB_USERNAME \
+                              --build-arg DB_PASSWORD=$DB_PASSWORD \
+                              --build-arg DB_DATABASE=$DB_DATABASE \
+                              --build-arg DB_HOST=$DB_HOST \
+                              --build-arg DB_DIALECT=$DB_DIALECT \
+                              -t ${IMAGE_NAME} .
                 docker push ${IMAGE_NAME}
 
           - name: Deploy to Cloud Run
