@@ -35,3 +35,5 @@
           - name: Deploy to Cloud Run
             run: |
                 gcloud run deploy agroconnect-api --image ${IMAGE_NAME} --region asia-southeast2 --allow-unauthenticated
+            env:
+                CLOUDSDK_METRICS_ENVIRONMENT: github-actions-setup-gcloud
