@@ -16,8 +16,9 @@
             uses: actions/checkout@v2
         
           - name: Set Up Cloud SDK
-            uses: google-github-actions/setup-gcloud@v0.2.0
-            with: 
+            uses: 'google-github-actions/setup-gcloud@v1'
+            with:
+                version: '>= 416.0.0' 
                 project_id: capstone-c23-ps127
                 service_account_key: ${{secrets.GCLOUD_AUTH}}
 
