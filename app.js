@@ -11,7 +11,7 @@ const bodyParser = require('body-parser');
 // Request Logs Store in Morgan 
 app.use(morgan('dev'));
 
-// Url Parser to JSOn
+// Url Parser to Json
 app.use(
     bodyParser.urlencoded({
         extended: false,
