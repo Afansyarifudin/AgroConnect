@@ -34,7 +34,4 @@
 
           - name: Deploy to Cloud Run
             run: |
-                gcloud run deploy agroconnect-api \
-                --image ${IMAGE_NAME} \
-                --region asia-southeast2 \
-                --allow-unauthenticated
+                gcloud run deploy agroconnect-api --image ${IMAGE_NAME} --region asia-southeast2 --allow-unauthenticated
