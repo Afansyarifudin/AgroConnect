@@ -57,11 +57,13 @@ controller.userLogin = async (req,res) => {
             });
         }
 
-        const data = await User.findAll();
 
         const {email, password} = req.body;
 
-        const user = await User.findOne({email});
+        const user = await User.findOne({ where: { email } });
+
+        // console.log(user);
+
         if (!user) {
             return res.status(400).json({
                 message: "User doesn't exist. Please register first!"
@@ -75,6 +77,8 @@ controller.userLogin = async (req,res) => {
             });
         }
 
+        // const data = await User.findOne({email});
+
         const token = jwt.sign({
             user_id: user.id, 
             email 
@@ -82,7 +86,7 @@ controller.userLogin = async (req,res) => {
             expiresIn: "2h",
         });
         res.status(200).json({
-            data,
+            user,
             token
             // ...user._doc
 
