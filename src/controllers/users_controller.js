@@ -14,7 +14,7 @@ controller.userRegister = async (req,res) => {
             });
         }
 
-        const {username, email, password, role} = req.body;
+        const {username, email, password, role, avatar} = req.body;
 
         if (!(username && email && password)) {
             res.status(400).json({message:"username, email, and password are required"});
@@ -35,6 +35,7 @@ controller.userRegister = async (req,res) => {
             password: hashedPassword,
             username,
             role,
+            avatar,
         });
 
         user = await user.save();
