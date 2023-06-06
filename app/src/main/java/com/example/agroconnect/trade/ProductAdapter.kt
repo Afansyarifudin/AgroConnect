@@ -1,15 +1,13 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.agroconnect.databinding.ItemProductBinding
+import com.example.agroconnect.datamodel.Product
 
 
 class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {

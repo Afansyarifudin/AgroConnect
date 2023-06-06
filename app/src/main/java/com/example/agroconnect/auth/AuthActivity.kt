@@ -1,14 +1,18 @@
-package com.example.agroconnect;
+package com.example.agroconnect.auth;
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.FragmentStatePagerAdapter
-import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager.widget.ViewPager
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.R
+import com.example.agroconnect.SessionManager
 import com.example.agroconnect.databinding.ActivityAuthBinding
 import com.google.android.material.tabs.TabLayout
 
@@ -16,6 +20,7 @@ class AuthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAuthBinding
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,12 +28,18 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sessionManager = SessionManager(this)
+
         viewPager = binding.viewPager
         tabLayout = binding.tabLayout
 
         val pagerAdapter = AuthPagerAdapter(supportFragmentManager)
         viewPager.adapter = pagerAdapter
         tabLayout.setupWithViewPager(viewPager)
+
+        if (sessionManager.isSessionActive()) {
+            navigateToMainActivity()
+        }
     }
 
     private inner class AuthPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -46,11 +57,23 @@ class AuthActivity : AppCompatActivity() {
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
-            return when (position) {
-                0 -> "Login"
-                1 -> "Register"
-                else -> null
-            }
+            val context = viewPager.context
+            val typeface = ResourcesCompat.getFont(context, R.font.nunito)
+            val spannableString = SpannableString(
+                when (position) {
+                    0 -> "Login"
+                    1 -> "Register"
+                    else -> null
+                }
+            )
+            spannableString.setSpan(CustomTypefaceSpan(typeface), 0, spannableString.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            return spannableString
         }
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 }

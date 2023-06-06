@@ -1,19 +1,19 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.agroconnect.databinding.ActivityPotentialBinding
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.databinding.ActivityTradeBinding
 
-class PotentialActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityPotentialBinding
+class TradeActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTradeBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
-        binding = ActivityPotentialBinding.inflate(layoutInflater)
+        binding = ActivityTradeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.backButton.setOnClickListener{

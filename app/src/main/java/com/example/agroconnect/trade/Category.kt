@@ -1,4 +1,4 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 data class Category(
     val id: Int,

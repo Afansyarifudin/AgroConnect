@@ -5,20 +5,34 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.example.agroconnect.auth.AuthActivity
 import com.example.agroconnect.databinding.ActivityMainBinding
 import com.example.agroconnect.databinding.ModalLayoutBinding
+import com.example.agroconnect.trade.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var sessionManager: SessionManager
+    private lateinit var networkConnectivityWatcher: NetworkConnectivityWatcher
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        networkConnectivityWatcher = NetworkConnectivityWatcher(this)
+        networkConnectivityWatcher.startWatchingConnectivity()
+        sessionManager = SessionManager(this)
 
-        binding.tvUsername.text = "Fauzan Ali"
+        if (!sessionManager.isSessionActive()) {
+            navigateToAuthActivity()
+            return
+        }
+
+        val username = intent.getStringExtra("username")
+        val role = intent.getStringExtra("role")
+
+        binding.tvUsername.text = "$role $username"
         binding.tvGreeting.text = "Selamat pagi,"
 
         Glide.with(this)
@@ -68,4 +82,20 @@ class MainActivity : AppCompatActivity() {
             dialog.show()
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        networkConnectivityWatcher.stopWatchingConnectivity()
+    }
+
+
+
+    private fun navigateToAuthActivity() {
+        val intent = Intent(this, AuthActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+
 }
+

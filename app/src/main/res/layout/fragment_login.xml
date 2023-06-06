@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:hint="Email"
+        android:fontFamily="@font/nunito"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,6 +25,7 @@
         android:layout_marginTop="10dp"
         android:hint="Password"
         android:inputType="textPassword"
+        android:fontFamily="@font/nunito"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail" />
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Login"
+        android:fontFamily="@font/nunito"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPassword" />

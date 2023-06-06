@@ -1,4 +1,4 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.DatePicker
 import android.widget.Spinner
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.databinding.ActivityDemandBinding
 import java.text.SimpleDateFormat
 import java.util.*

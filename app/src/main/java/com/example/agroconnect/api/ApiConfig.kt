@@ -1,10 +1,8 @@
-package com.example.agroconnect
+package com.example.agroconnect.api
 
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 object ApiConfig {
     private const val BASE_URL = "https://agroconnect-api-2ape6j34pa-et.a.run.app/"

@@ -1,8 +1,7 @@
-package com.example.agroconnect
+package com.example.agroconnect.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,10 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.R
+import com.example.agroconnect.Result
+import com.example.agroconnect.SessionManager
 
 class LoginFragment : Fragment() {
 
@@ -19,6 +21,7 @@ class LoginFragment : Fragment() {
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var viewModel: LoginViewModel
+    private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +39,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        sessionManager = SessionManager(requireContext().applicationContext)
 
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString()
@@ -48,9 +52,14 @@ class LoginFragment : Fragment() {
             when (result) {
                 is Result.Success -> {
                     val loginResponse = result.data
+                    val username = loginResponse?.username
+                    val role = loginResponse?.role
+                    sessionManager.startSession()
 
                     // Handle successful login response
                     val intent = Intent(activity, MainActivity::class.java)
+                    intent.putExtra("username", username)
+                    intent.putExtra("role", role)
                     startActivity(intent)
                     activity?.finish()
                 }
@@ -63,8 +72,27 @@ class LoginFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
                 }
+                else -> {
+                    // Handle login error
+                    Toast.makeText(
+                        activity,
+                        "Login failed: Contact Administrator",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                }
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        sessionManager.resetSession()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        sessionManager.endSession()
     }
 }
 

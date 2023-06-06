@@ -1,4 +1,4 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 import android.R
 import android.content.Intent
@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.databinding.ActivitySearchBinding
 
 

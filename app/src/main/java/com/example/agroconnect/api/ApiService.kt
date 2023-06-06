@@ -1,5 +1,12 @@
-package com.example.agroconnect
+package com.example.agroconnect.api
 
+import com.example.agroconnect.*
+import com.example.agroconnect.datamodel.LoginRequest
+import com.example.agroconnect.datamodel.LoginResponse
+import com.example.agroconnect.datamodel.RegisterRequest
+import com.example.agroconnect.datamodel.CategoryResponse
+import com.example.agroconnect.datamodel.ProductResponse
+import com.example.agroconnect.datamodel.RegisterResponse
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -22,7 +29,14 @@ interface ApiService {
     @Headers("Content-Type: application/json")
     @POST("users/login")
     suspend fun login(
-        @Body request: LoginRequest): Response<LoginResponse>
+        @Body request: LoginRequest
+    ): Response<LoginResponse>
+
+    @Headers("Content-Type: application/json")
+    @POST("users/register")
+    suspend fun register(
+        @Body request: RegisterRequest
+    ): Response<RegisterResponse>
 
 
     @GET("products")

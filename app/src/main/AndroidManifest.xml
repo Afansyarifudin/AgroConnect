@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.agroconnect">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -15,22 +16,22 @@
         android:theme="@style/Theme.AgroConnect"
         tools:targetApi="31">
         <activity
-            android:name=".AuthActivity"
+            android:name=".auth.AuthActivity"
             android:exported="false"/>
         <activity
-            android:name=".PotentialActivity"
+            android:name=".trade.PotentialActivity"
             android:exported="false" />
         <activity
-            android:name=".DemandActivity"
+            android:name=".trade.DemandActivity"
             android:exported="false" />
         <activity
-            android:name=".SuppliesActivity"
+            android:name=".trade.SuppliesActivity"
             android:exported="false" />
         <activity
-            android:name=".TradeActivity"
+            android:name=".trade.TradeActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".trade.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

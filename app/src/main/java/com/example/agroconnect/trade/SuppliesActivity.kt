@@ -1,20 +1,13 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 import android.R
-import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import android.widget.Spinner
-import com.example.agroconnect.databinding.ActivityDemandBinding
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.databinding.ActivitySuppliesBinding
-import com.example.agroconnect.databinding.ActivityTradeBinding
-import java.text.SimpleDateFormat
-import java.util.*
 
 class SuppliesActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySuppliesBinding

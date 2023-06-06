@@ -1,7 +1,10 @@
-package com.example.agroconnect
+package com.example.agroconnect.trade
 
 
 import androidx.lifecycle.*
+import com.example.agroconnect.api.ApiConfig
+import com.example.agroconnect.api.ApiService
+import com.example.agroconnect.datamodel.Product
 
 import kotlinx.coroutines.launch
 

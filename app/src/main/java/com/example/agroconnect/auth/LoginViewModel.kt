@@ -1,10 +1,15 @@
-package com.example.agroconnect
+package com.example.agroconnect.auth
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.agroconnect.Result
+import com.example.agroconnect.api.ApiConfig
+import com.example.agroconnect.api.ApiService
+import com.example.agroconnect.datamodel.LoginRequest
+import com.example.agroconnect.datamodel.LoginResponse
 import kotlinx.coroutines.launch
 
 class LoginViewModel : ViewModel() {
@@ -32,6 +37,7 @@ class LoginViewModel : ViewModel() {
             }
         }
     }
+
 }
 
 

@@ -1,4 +1,4 @@
-package com.example.agroconnect
+package com.example.agroconnect.datamodel
 
 import com.google.gson.annotations.SerializedName
 

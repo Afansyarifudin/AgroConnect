@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.agroconnect.auth.AuthActivity
 
 class SplashActivity : AppCompatActivity() {
     private val SPLASH_DELAY: Long = 2000 // Time in milliseconds
