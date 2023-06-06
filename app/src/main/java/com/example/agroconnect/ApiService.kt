@@ -19,6 +19,12 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): Response<CategoryResponse>
 
+    @Headers("Content-Type: application/json")
+    @POST("users/login")
+    suspend fun login(
+        @Body request: LoginRequest): Response<LoginResponse>
+
+
     @GET("products")
     suspend fun getAllProdAgro(): ProductResponse
 
@@ -57,10 +63,7 @@ interface ApiService {
         @Path("id") id: Int?,
     ): ProductResponse
 
-    @POST("users/login/{id}")
-    suspend fun postLoginUserAgro(
-        @Path("id") id: Int?,
-    ): ProductResponse
+
 
 
 //    @JvmSuppressWildcards

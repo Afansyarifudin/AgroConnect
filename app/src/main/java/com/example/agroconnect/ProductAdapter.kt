@@ -1,14 +1,12 @@
 package com.example.agroconnect
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.agroconnect.databinding.ItemProductBinding
@@ -66,7 +64,10 @@ class ProductAdapter : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() 
                 }
             }
         }
+
+
     }
+
 
     fun submitList(products: List<Product>) {
         this.products = products

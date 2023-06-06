@@ -19,7 +19,7 @@ class ProductViewModel : ViewModel() {
             try {
                 val response = apiService.searchProducts(query)
                 val productResponse = response.body()
-                val productList = productResponse?.data
+                val productList = productResponse!!.data
                 if (productList.isNullOrEmpty()) {
                     _searchResultEmpty.value = true
                     _products.value = productList
