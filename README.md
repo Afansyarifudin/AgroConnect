@@ -12,11 +12,11 @@ AgroConnect-Bangkit Capstone Project C23-PS127
 
 ## API Documentation 
 
-Products Routes :
-    GET("/products")  
+    Products Routes :
+	    GET("/products")   
 
-Farmers Routes :
-    GET("/farmer")               
+    Farmers Routes :
+	    GET("/farmer")             
 
 
 
