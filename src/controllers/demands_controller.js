@@ -1,5 +1,6 @@
 const {Demand} = require('../models');
 const controller = {};
+const { Op } = require('sequelize');
 
 controller.getAllDemand = async (req, res) => {
     try {
@@ -148,5 +149,34 @@ controller.deleteDemand = async (req,res) => {
     }
 }
 
+controller.getDemandsbyName = async (req, res) => {
+    try {
+        const demandsName = req.query.name;
+
+        var condition = demandsName ? { name: { [Op.iLike]: `%${demandsName}%` } } : null;
+
+        const data = await Demand.findAll({
+            where: condition
+        });
+
+        if (data.length === 0) {
+            return res.status(404).json({
+                status: "Not Found",
+                message: "Product Not Found"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Ok",
+            message: "Success Get Data",
+            data
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        });
+    }
+}
 
 module.exports = controller;

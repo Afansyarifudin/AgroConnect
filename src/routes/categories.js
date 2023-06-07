@@ -1,8 +1,10 @@
+'use strict';
 const router = require('express').Router();
 const controller = require('../controllers/categories_controller');
 const auth = require('../middleware/auth');
 
-router.get('/', controller.findAllCategories);      //get all categories
+router.get('/', controller.findAllCategories);
+router.get('/search', controller.getCategoriesbyName); // add new endpoint for search categories      //get all categories
 router.get('/:categoryId', controller.getCategoryById);         //get category by id 
 router.post('/', controller.createCategory);        //create category
 router.put('/:categoryId', controller.updateCategory);      //update category
