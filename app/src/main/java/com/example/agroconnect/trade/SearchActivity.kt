@@ -30,17 +30,28 @@ class SearchActivity : AppCompatActivity() {
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
-        val recyclerView: RecyclerView = binding.rvFind
-        adapter = ProductAdapter()
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-        recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                this,
-                DividerItemDecoration.VERTICAL
+        val isDemand = intent.getBooleanExtra("isDemand", false)
+
+        if (isDemand) {
+            binding.tvDemand.text = "Find Demand"
+
+        } else {
+            binding.tvDemand.text = "Find Supplies"
+            productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
+            val recyclerView: RecyclerView = binding.rvFind
+            adapter = ProductAdapter()
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.adapter = adapter
+            recyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    this,
+                    DividerItemDecoration.VERTICAL
+                )
             )
-        )
+
+        }
+
+
 
         categoryViewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
         categoryViewModel.categories.observe(this) { categories ->
@@ -55,20 +66,14 @@ class SearchActivity : AppCompatActivity() {
 
         categoryViewModel.fetchCategories()
 
-        val isDemand = intent.getBooleanExtra("isDemand", false)
+
 
         binding.backButton.setOnClickListener{
             val mainActivity = Intent(this, MainActivity::class.java)
             startActivity(mainActivity)
         }
 
-        binding.tvDemand.apply {
-            text = if (isDemand) {
-                "Find Demand"
-            } else {
-                "Find Supplies"
-            }
-        }
+
 
         val searchView: SearchView = binding.searchView
 

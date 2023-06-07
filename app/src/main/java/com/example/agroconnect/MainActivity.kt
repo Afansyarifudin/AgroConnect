@@ -15,6 +15,7 @@ import com.example.agroconnect.databinding.ModalLayoutBinding
 import com.example.agroconnect.datamodel.LoginResponse
 import com.example.agroconnect.trade.*
 import com.google.gson.Gson
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,13 +36,22 @@ class MainActivity : AppCompatActivity() {
 
         val loginResponse = gson.fromJson(loginResponseJson, LoginResponse::class.java)
 
-
+        val calendar = Calendar.getInstance()
+        val currentHour = calendar.get(Calendar.HOUR_OF_DAY)
         val username = loginResponse.user.username
         val role = loginResponse.user.role
         val avatar = loginResponse.user.avatar
 
+
+        val greeting = when (currentHour) {
+            in 0..11 -> "Selamat pagi,"
+            in 12..15 -> "Selamat siang,"
+            in 16..18 -> "Selamat sore,"
+            else -> "Selamat malam,"
+        }
+
+        binding.tvGreeting.text = "$greeting"
         binding.tvUsername.text = "$role $username"
-        binding.tvGreeting.text = "Selamat pagi,"
 
         Glide.with(this)
             .load(avatar) // Replace with your actual image URL

@@ -1,12 +1,7 @@
 package com.example.agroconnect.api
 
 import com.example.agroconnect.*
-import com.example.agroconnect.datamodel.LoginRequest
-import com.example.agroconnect.datamodel.LoginResponse
-import com.example.agroconnect.datamodel.RegisterRequest
-import com.example.agroconnect.datamodel.CategoryResponse
-import com.example.agroconnect.datamodel.ProductResponse
-import com.example.agroconnect.datamodel.RegisterResponse
+import com.example.agroconnect.datamodel.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -19,10 +14,21 @@ interface ApiService {
 //        @Field("amount") amount: Int,
 //        @Field("location") location: String
 //    ): AgroResponse
+    companion object {
+        private const val X_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODYxMjMwOTEsImV4cCI6MTY4NjEzMDI5MX0.eCWzl-Pv7Bcwik_XQOFaumvJewkADd7Y6eDX7lr0ElY"
+    }
 
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
     @GET("products/search")
     suspend fun searchProducts(@Query("name") query: String): Response<ProductResponse>
 
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
+    @GET("products/{id}")
+    suspend fun getDetailProducts(
+        @Path("id") id: Int?
+    ): Response<ProductResponse>
+
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
     @GET("categories")
     suspend fun getCategories(): Response<CategoryResponse>
 
@@ -38,6 +44,19 @@ interface ApiService {
         @Body request: RegisterRequest
     ): Response<RegisterResponse>
 
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @POST("products")
+    suspend fun postProducts(
+        @Header("x-access-token") tokenAuth: String,
+        @Body request: ProductRequest
+    ): Response<ProductCreateResponse>
+
+    @Headers("Content-Type: application/json", "Accept: application/json")
+    @POST("demands")
+    suspend fun postDemand(
+        @Header("x-access-token") tokenAuth: String,
+        @Body request: DemandRequest
+    ): Response<DemandCreateResponse>
 
     @GET("products")
     suspend fun getAllProdAgro(): ProductResponse
@@ -80,34 +99,4 @@ interface ApiService {
 
 
 
-//    @JvmSuppressWildcards
-//    @GET("users")
-//    suspend suspend fun getUserGithub(
-//        @Header("Authorization")
-//        authorization: String = "token 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"
-//    ): MutableList<GithubData.Item>
-//
-//    @JvmSuppressWildcards
-//    @GET("users/{username}")
-//    suspend suspend fun getDetailUserGithub(
-//        @Path("username") username: String,
-//        @Header("Authorization")
-//        authorization: String = "token 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"
-//    ): DetailGithubData
-//
-//    @JvmSuppressWildcards
-//    @GET("/users/{username}/followers")
-//    suspend fun getFollowersUserGithub(
-//        @Path("username") username: String,
-//        @Header("Authorization")
-//        authorization: String = "token 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"
-//    ): MutableList<GithubData.Item>
-//
-//    @JvmSuppressWildcards
-//    @GET("/users/{username}/following")
-//    suspend fun getFollowingUserGithub(
-//        @Path("username") username: String,
-//        @Header("Authorization")
-//        authorization: String = "token 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"
-//    ): MutableList<GithubData.Item>
 }

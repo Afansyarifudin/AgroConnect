@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.agroconnect.api.ApiConfig
 import com.example.agroconnect.api.ApiService
+import com.example.agroconnect.datamodel.Category
 import kotlinx.coroutines.launch
 
 class CategoryViewModel : ViewModel() {

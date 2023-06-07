@@ -3,12 +3,27 @@ package com.example.agroconnect.datamodel
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("id") val id: Int,
-    @SerializedName("username") val username: String,
-    @SerializedName("email") val email: String,
-    @SerializedName("password") val password: String,
-    @SerializedName("role") val role: String,
-    @SerializedName("avatar") val avatar: String,
-    @SerializedName("createdAt") val createdAt: String,
-    @SerializedName("updatedAt") val updatedAt: String
+    @field:SerializedName("createdAt")
+    val createdAt: String? = null,
+
+    @field:SerializedName("password")
+    val password: String? = null,
+
+    @field:SerializedName("role")
+    val role: String? = null,
+
+    @field:SerializedName("id")
+    val id: Int? = null,
+
+    @field:SerializedName("avatar")
+    val avatar: String? = null,
+
+    @field:SerializedName("email")
+    val email: String? = null,
+
+    @field:SerializedName("username")
+    val username: String? = null,
+
+    @field:SerializedName("updatedAt")
+    val updatedAt: String? = null
 )

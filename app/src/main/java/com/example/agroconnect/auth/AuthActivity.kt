@@ -32,7 +32,9 @@ class AuthActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("session", MODE_PRIVATE)
 
         if (isSessionActive()) {
-            navigateToMainActivity()
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
             return
         }
 
@@ -79,9 +81,4 @@ class AuthActivity : AppCompatActivity() {
         return loginResponseJson != null
     }
 
-    private fun navigateToMainActivity() {
-        val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
-        finish()
-    }
 }
