@@ -23,19 +23,31 @@ class LoginViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val request = LoginRequest(email, password)
-                Log.d("LoginViewModel", "Sending login request: $request") // Logging the request
+                Log.d("LoginViewModel", "Sending login request: $request")
                 val response = apiService.login(request)
-                Log.d("LoginViewModel", "$response")
+//                val responseBody = response.body()?.user
+
+                Log.d("LoginViewModel", "Response: $response")
+
                 if (response.isSuccessful) {
                     val loginResponse = response.body()
-                    _loginResult.value = Result.Success(loginResponse)
+                    if (loginResponse != null) {
+                        _loginResult.value = Result.Success(loginResponse)
+                        Log.d("LoginViewModel", "Berhasil kok")
+                    } else {
+                        Log.d("LoginViewModel", "Response body is null")
+                        _loginResult.value = Result.Error(Exception("Login failed"))
+                    }
                 } else {
+                    Log.d("LoginViewModel", "Response not successful: ${response.code()}")
                     _loginResult.value = Result.Error(Exception("Login failed"))
                 }
             } catch (e: Exception) {
+                Log.e("LoginViewModel", "Exception: ${e.message}", e)
                 _loginResult.value = Result.Error(e)
             }
         }
+
     }
 
 }

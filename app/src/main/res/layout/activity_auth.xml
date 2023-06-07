@@ -41,7 +41,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/viewPager"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_app_for_tr_0" />
+        app:srcCompat="@drawable/farm_to_table" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

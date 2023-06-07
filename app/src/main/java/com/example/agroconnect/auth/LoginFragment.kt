@@ -2,6 +2,7 @@ package com.example.agroconnect.auth
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
         sessionManager = SessionManager(requireContext().applicationContext)
 
         btnLogin.setOnClickListener {
@@ -52,14 +53,28 @@ class LoginFragment : Fragment() {
             when (result) {
                 is Result.Success -> {
                     val loginResponse = result.data
-                    val username = loginResponse?.username
-                    val role = loginResponse?.role
-                    sessionManager.startSession()
+                    val token = loginResponse?.token
+                    val user = loginResponse?.user
+
+                    Log.d("Login", "Login response: $loginResponse")
+                    Log.d("Login", "Token: $token")
+                    Log.d("Login", "User: $user")
+                    val username = user?.username
+                    val role = user?.role
+                    val avatar = user?.avatar
+//                    sessionManager.startSession()
+
+                    Toast.makeText(
+                        activity,
+                        "Login success $username and $role, $token",
+                        Toast.LENGTH_SHORT
+                    ).show()
 
                     // Handle successful login response
                     val intent = Intent(activity, MainActivity::class.java)
                     intent.putExtra("username", username)
                     intent.putExtra("role", role)
+                    intent.putExtra("avatar", avatar)
                     startActivity(intent)
                     activity?.finish()
                 }

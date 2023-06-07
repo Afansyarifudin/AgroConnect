@@ -24,13 +24,14 @@ class MainActivity : AppCompatActivity() {
         networkConnectivityWatcher.startWatchingConnectivity()
         sessionManager = SessionManager(this)
 
-        if (!sessionManager.isSessionActive()) {
-            navigateToAuthActivity()
-            return
-        }
+//        if (!sessionManager.isSessionActive()) {
+//            navigateToAuthActivity()
+//            return
+//        }
 
         val username = intent.getStringExtra("username")
         val role = intent.getStringExtra("role")
+        val avatar = intent.getStringExtra("avatar")
 
         binding.tvUsername.text = "$role $username"
         binding.tvGreeting.text = "Selamat pagi,"

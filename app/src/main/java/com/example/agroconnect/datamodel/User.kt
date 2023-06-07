@@ -8,6 +8,7 @@ data class User(
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,
     @SerializedName("role") val role: String,
+    @SerializedName("avatar") val avatar: String,
     @SerializedName("createdAt") val createdAt: String,
     @SerializedName("updatedAt") val updatedAt: String
 )

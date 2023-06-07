@@ -1,5 +1,6 @@
 package com.example.agroconnect.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.agroconnect.MainActivity
 import com.example.agroconnect.R
 import com.example.agroconnect.Result
 import com.example.agroconnect.SessionManager
@@ -45,9 +47,10 @@ class RegisterFragment : Fragment() {
             val name = etName.text.toString()
             val email = etEmail.text.toString()
             val password = etPassword.text.toString()
-            val role = "admin"
+            val role = "Admin"
+            val avatar = "https://static.vecteezy.com/system/resources/previews/002/275/847/non_2x/male-avatar-profile-icon-of-smiling-caucasian-man-vector.jpg"
 
-            viewModel.register(name, email, password, role)
+            viewModel.register(name, email, password, role, avatar)
         }
 
         viewModel.registerResult.observe(viewLifecycleOwner) { result ->
@@ -62,11 +65,15 @@ class RegisterFragment : Fragment() {
                         Toast.LENGTH_SHORT
                     ).show()
 
+//                    sessionManager.startSession()
+
+
 
                     // Handle successful registration response
 //                    val intent = Intent(activity, MainActivity::class.java)
-//                    intent.putExtra("username", username)
-//                    intent.putExtra("role", role)
+//
+////                    intent.putExtra("username", username)
+////                    intent.putExtra("role", role)
 //                    startActivity(intent)
 //                    activity?.finish()
                 }

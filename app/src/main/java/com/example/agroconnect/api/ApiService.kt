@@ -26,13 +26,13 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): Response<CategoryResponse>
 
-    @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json", "Accept: application/json")
     @POST("users/login")
     suspend fun login(
         @Body request: LoginRequest
     ): Response<LoginResponse>
 
-    @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json", "Accept: application/json")
     @POST("users/register")
     suspend fun register(
         @Body request: RegisterRequest

@@ -19,10 +19,10 @@ class RegisterViewModel : ViewModel() {
     private val _registerResult = MutableLiveData<Result<RegisterResponse>>()
     val registerResult: LiveData<Result<RegisterResponse>> = _registerResult
 
-    fun register(username: String, email: String, password: String, role: String) {
+    fun register(username: String, email: String, password: String, role: String, avatar: String) {
         viewModelScope.launch {
             try {
-                val request = RegisterRequest(username, email, password, role)
+                val request = RegisterRequest(username, email, password, role, avatar)
                 Log.d("RegisterViewModel", "Sending register request: $request") // Logging the request
                 val response = apiService.register(request)
                 Log.d("RegisterViewModel", "$response")
