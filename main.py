@@ -78,10 +78,10 @@ def get_data_farmer():
         SELECT u.username AS "Name",
             SPLIT_PART(p.location, ',', 1) AS "Lat",
             SPLIT_PART(p.location, ',', 2) AS "Long",
-            SUM(CASE WHEN c.id = 1 THEN p.amount ELSE 0 END) AS "Commodity_1",
-            SUM(CASE WHEN c.id = 2 THEN p.amount ELSE 0 END) AS "Commodity_2",
-            SUM(CASE WHEN c.id = 3 THEN p.amount ELSE 0 END) AS "Commodity_3",
-            SUM(CASE WHEN c.id = 4 THEN p.amount ELSE 0 END) AS "Commodity_4",
+            SUM(CASE WHEN c.id = 7 THEN p.amount ELSE 0 END) AS "Commodity_1",
+            SUM(CASE WHEN c.id = 8 THEN p.amount ELSE 0 END) AS "Commodity_2",
+            SUM(CASE WHEN c.id = 9 THEN p.amount ELSE 0 END) AS "Commodity_3",
+            SUM(CASE WHEN c.id = 10 THEN p.amount ELSE 0 END) AS "Commodity_4",
             SUM(CASE WHEN c.id = 5 THEN p.amount ELSE 0 END) AS "Commodity_5",
             SUM(CASE WHEN c.id = 6 THEN p.amount ELSE 0 END) AS "Commodity_6"
         FROM public."Products" p
