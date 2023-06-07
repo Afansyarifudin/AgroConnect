@@ -11,11 +11,17 @@ import android.widget.Toast
 class NetworkConnectivityWatcher(private val context: Context) {
 
     private var connectivityReceiver: BroadcastReceiver? = null
+    private var isConnected = false
 
     fun startWatchingConnectivity() {
         connectivityReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                if (!isNetworkAvailable()) {
+                val isPreviouslyConnected = isConnected
+                isConnected = isNetworkAvailable()
+
+                if (isConnected && !isPreviouslyConnected) {
+                    showToast("Internet connection is available")
+                } else if (!isConnected) {
                     showToast("No internet connection")
                 }
             }
@@ -42,5 +48,6 @@ class NetworkConnectivityWatcher(private val context: Context) {
     private fun showToast(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
+
 }
 

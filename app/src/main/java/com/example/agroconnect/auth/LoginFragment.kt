@@ -1,6 +1,8 @@
 package com.example.agroconnect.auth
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,6 +17,7 @@ import com.example.agroconnect.MainActivity
 import com.example.agroconnect.R
 import com.example.agroconnect.Result
 import com.example.agroconnect.SessionManager
+import com.google.gson.Gson
 
 class LoginFragment : Fragment() {
 
@@ -22,7 +25,7 @@ class LoginFragment : Fragment() {
     private lateinit var etPassword: EditText
     private lateinit var btnLogin: Button
     private lateinit var viewModel: LoginViewModel
-    private lateinit var sessionManager: SessionManager
+    private lateinit var sessionPreferences: SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +36,7 @@ class LoginFragment : Fragment() {
         etEmail = rootView.findViewById(R.id.etEmail)
         etPassword = rootView.findViewById(R.id.etPassword)
         btnLogin = rootView.findViewById(R.id.btnLogin)
+        sessionPreferences = requireContext().getSharedPreferences("session", Context.MODE_PRIVATE)
         return rootView
     }
 
@@ -40,7 +44,6 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(requireActivity()).get(LoginViewModel::class.java)
-        sessionManager = SessionManager(requireContext().applicationContext)
 
         btnLogin.setOnClickListener {
             val email = etEmail.text.toString()
@@ -62,7 +65,12 @@ class LoginFragment : Fragment() {
                     val username = user?.username
                     val role = user?.role
                     val avatar = user?.avatar
-//                    sessionManager.startSession()
+
+                    // Save login response JSON to session
+                    val gson = Gson()
+                    val loginResponseJson = gson.toJson(loginResponse)
+                    sessionPreferences.edit().putString("loginResponse", loginResponseJson).apply()
+                    Log.d("Login", "Kalo disimpen jadi string: $loginResponseJson")
 
                     Toast.makeText(
                         activity,
@@ -94,20 +102,9 @@ class LoginFragment : Fragment() {
                         "Login failed: Contact Administrator",
                         Toast.LENGTH_SHORT
                     ).show()
-
                 }
             }
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        sessionManager.resetSession()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sessionManager.endSession()
     }
 }
 

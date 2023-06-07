@@ -10,10 +10,12 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager.widget.ViewPager
 import com.example.agroconnect.MainActivity
 import com.example.agroconnect.R
 import com.example.agroconnect.Result
 import com.example.agroconnect.SessionManager
+import com.google.android.material.tabs.TabLayout
 
 class RegisterFragment : Fragment() {
 
@@ -22,7 +24,6 @@ class RegisterFragment : Fragment() {
     private lateinit var etPassword: EditText
     private lateinit var btnRegister: Button
     private lateinit var viewModel: RegisterViewModel
-    private lateinit var sessionManager: SessionManager
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,7 +42,6 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-        sessionManager = SessionManager(requireContext().applicationContext)
 
         btnRegister.setOnClickListener {
             val name = etName.text.toString()
@@ -57,25 +57,16 @@ class RegisterFragment : Fragment() {
             when (result) {
                 is Result.Success -> {
                     val registerResponse = result.data
-//                    val username = registerResponse?.username
+
+                    val username = registerResponse?.username
 //                    val role = registerResponse?.role
                     Toast.makeText(
                         activity,
-                        "Registration success: $registerResponse",
+                        "Hey, $username! Your registration is succesful. Please login using your email and password!",
                         Toast.LENGTH_SHORT
                     ).show()
 
-//                    sessionManager.startSession()
 
-
-
-                    // Handle successful registration response
-//                    val intent = Intent(activity, MainActivity::class.java)
-//
-////                    intent.putExtra("username", username)
-////                    intent.putExtra("role", role)
-//                    startActivity(intent)
-//                    activity?.finish()
                 }
                 is Result.Error -> {
                     val exception = result.exception
@@ -98,13 +89,4 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        sessionManager.resetSession()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        sessionManager.endSession()
-    }
 }
