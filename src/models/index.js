@@ -20,7 +20,7 @@ if (config.use_env_variable) {
 sequelize
   .authenticate()
   .then(() => {
-    console.log('Successfully Connected to Database');
+    console.log('Successfully Connected to Database', config.database, "in", process.env.NODE_ENV, "environment");
   })
   .catch((error) => {
     console.error('Failed to connect to the database: ', error);

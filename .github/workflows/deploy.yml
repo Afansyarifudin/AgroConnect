@@ -27,11 +27,17 @@
 
           - name: Set Environment Variables
             run: |
+                echo "NODE_ENV=${{ secrets.NODE_ENV }}" >> $GITHUB_ENV
                 echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> $GITHUB_ENV
                 echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> $GITHUB_ENV
                 echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> $GITHUB_ENV
                 echo "DB_HOST=${{ secrets.DB_HOST }}" >> $GITHUB_ENV
                 echo "DB_DIALECT=${{ secrets.DB_DIALECT }}" >> $GITHUB_ENV
+                echo "DB_USERNAME_PROD=${{ secrets.DB_USERNAME_PROD }}" >> $GITHUB_ENV
+                echo "DB_PASSWORD_PROD=${{ secrets.DB_PASSWORD_PROD }}" >> $GITHUB_ENV
+                echo "DB_DATABASE_PROD=${{ secrets.DB_DATABASE_PROD }}" >> $GITHUB_ENV
+                echo "DB_HOST_PROD=${{ secrets.DB_HOST_PROD }}" >> $GITHUB_ENV
+                echo "DB_DIALECT_PROD=${{ secrets.DB_DIALECT_PROD }}" >> $GITHUB_ENV
             
           - name: Build and Push Docker Image 
             run: |
@@ -42,6 +48,12 @@
                               --build-arg DB_DATABASE=$DB_DATABASE \
                               --build-arg DB_HOST=$DB_HOST \
                               --build-arg DB_DIALECT=$DB_DIALECT \
+                              --build-arg NODE_ENV=$NODE_ENV \
+                              --build-arg DB_USERNAME_PROD=$DB_USERNAME_PROD \
+                              --build-arg DB_PASSWORD_PROD=$DB_PASSWORD_PROD \
+                              --build-arg DB_DATABASE_PROD=$DB_DATABASE_PROD \
+                              --build-arg DB_HOST_PROD=$DB_HOST_PROD \
+                              --build-arg DB_DIALECT_PROD=$DB_DIALECT_PROD \
                               -t ${IMAGE_NAME} .
                 docker push ${IMAGE_NAME}
 
