@@ -2,6 +2,7 @@ Flask==2.3.2 #flask as framework
 numpy==1.21.0
 pandas==2.0.2
 jsonify==0.5
+tensorflow==2.9
 matplotlib==3.7.1
 scikit-learn==1.2.2
 geopy==2.3.0
