@@ -13,7 +13,7 @@ app=Flask(__name__)
 #                         host=os.getenv("DB_HOST"), 
 #                         port="5432")
 
-# conn = psycopg2.connect(database="agroconnect_db", user="postgres", password="admin123", host="34.128.110.93", port="5432")
+# conn = psycopg2.connect(database="agroconnect_db_prod", user="postgres", password="agroconnect", host="34.128.87.179", port="5432")
 
 # query for database
 # cur.execute()
@@ -35,10 +35,10 @@ def index():
 def get_all_products():
     try:
         #connection to db
-        conn = psycopg2.connect(database="agroconnect_db", 
+        conn = psycopg2.connect(database="agroconnect_db_prod", 
                                 user="postgres", 
-                                password="admin123", 
-                                host="34.128.110.93", 
+                                password="agroconnect", 
+                                host="34.128.87.179", 
                                 port="5432")
 
         #create a cursor 
@@ -64,10 +64,10 @@ def get_all_products():
 @app.route("/farmer")
 def get_data_farmer():
     try:
-        conn = psycopg2.connect(database="agroconnect_db", 
+        conn = psycopg2.connect(database="agroconnect_db_prod", 
                                 user="postgres", 
-                                password="admin123", 
-                                host="34.128.110.93", 
+                                password="agroconnect", 
+                                host="34.128.87.179", 
                                 port="5432")
 
         #create a cursor 
