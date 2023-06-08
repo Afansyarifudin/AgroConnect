@@ -18,5 +18,6 @@ AgroConnect-Bangkit Capstone Project C23-PS127
     Farmers Routes :
 	    GET("/farmer")             
 
-
+## Example of the URL for getting the score
+    http://localhost:5000/getScore?supplier_data=Andi&supplier_data=-7&supplier_data=106&supplier_data=0&supplier_data=0&supplier_data=2000&supplier_data=200&supplier_data=0&supplier_data=0
 
