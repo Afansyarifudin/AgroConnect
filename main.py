@@ -66,15 +66,26 @@ def predict_location(clusters_n, iteration_n, array_location):
 def get_commodity_score(farmer_data, supplier_data):
     farmer_size,_ = farmer_data.shape
     supplier_size,_ = supplier_data.shape
+    max_value_farm = max(farmer_data.max(numeric_only=True))
+    max_value_sup = np.max(supplier_data)
+
+    if max_value_farm > max_value_sup:
+        norm_scale = max_value_farm
+    else:
+        norm_scale = max_value_sup
+
     commodity_score = np.zeros((farmer_size,supplier_size, 6))
     for farmer_index, farmer_row in farmer_data.iterrows():
         for supplier_index, supplier_row in enumerate(supplier_data):
             for commodity_col in range(1, 7): 
                 supplier_amount = supplier_row[commodity_col-1]
                 farmer_amount = farmer_row[f'Commodity_{commodity_col}'] 
-                if (farmer_amount >= supplier_amount) and (farmer_amount != 0):
-                    score = 1 - (farmer_amount - supplier_amount)/500
-                    commodity_score[farmer_index][supplier_index][commodity_col - 1] = score
+                if (farmer_amount >= supplier_amount) and (farmer_amount != 0) and (supplier_amount != 0):
+                    score = 1 - (farmer_amount - supplier_amount)/norm_scale
+                    commodity_score[farmer_index][supplier_index][commodity_col - 1] = abs(score)        
+                elif (farmer_amount < supplier_amount) and (farmer_amount != 0) and (supplier_amount != 0):
+                    score = (supplier_amount - farmer_amount)/norm_scale
+                    commodity_score[farmer_index][supplier_index][commodity_col - 1] = abs(score)            
                 else:
                     commodity_score[farmer_index][supplier_index][commodity_col - 1] = 0
     return np.mean(commodity_score,axis=-1), farmer_size
@@ -191,11 +202,12 @@ def get_data_farmer():
 @app.route("/getScore", methods=['GET'])
 def get_score():
     try:
-        args = request.args.getList['supplier_data']
-        supplier_data = np.array(args[3:]).reshape(1,6)
+        args = request.args.getlist('supplier_data')
+        supplier_data = np.array(args[3:]).reshape(1,6).astype(int)
         farmer_data = pd.read_json(get_data_farmer())
         final_commodity_score,farmer_size = get_commodity_score(farmer_data, supplier_data)
-
+        # print(farmer_data)
+        # print(final_commodity_score)
         #define the variable needed for the location prediction
         array_location = farmer_data[['Lat','Long']].values.tolist()
 
@@ -208,8 +220,8 @@ def get_score():
         labeled_farmer_data['Cluster'] = lst_centroid
         labeled_farmer_data['Score'] = final_commodity_score
         labeled_farmer_data.sort_values(by=['Score','Cluster'], ascending=False, inplace=True)
-
-        return labeled_farmer_data
+        # print(labeled_farmer_data.to_json(orient='records'))
+        return labeled_farmer_data.head(5).to_json(orient='records')
     except Exception as e:
         print("Failed to get score:", e)
         return str(e)
