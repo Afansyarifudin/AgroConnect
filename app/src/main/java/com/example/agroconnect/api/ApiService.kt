@@ -32,6 +32,10 @@ interface ApiService {
     @GET("categories")
     suspend fun getCategories(): Response<CategoryResponse>
 
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
+    @GET("demands")
+    suspend fun getAllDemands(): Response<DemandResponse>
+
     @Headers("Content-Type: application/json", "Accept: application/json")
     @POST("users/login")
     suspend fun login(
@@ -57,6 +61,10 @@ interface ApiService {
         @Header("x-access-token") tokenAuth: String,
         @Body request: DemandRequest
     ): Response<DemandCreateResponse>
+
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
+    @GET("demands/search")
+    suspend fun searchDemands(@Query("name") query: String): Response<DemandResponse>
 
     @GET("products")
     suspend fun getAllProdAgro(): ProductResponse

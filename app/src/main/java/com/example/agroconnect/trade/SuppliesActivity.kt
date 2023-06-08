@@ -12,10 +12,12 @@ import android.location.LocationListener
 import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -177,6 +179,24 @@ class SuppliesActivity : AppCompatActivity(), LocationListener {
             } else {
                 // Unable to get address for the location
             }
+        }
+    }
+
+    override fun onProviderDisabled(provider: String) {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            // The GPS provider is disabled, show a dialog to prompt the user to enable it
+            AlertDialog.Builder(this)
+                .setMessage("Location services are disabled. Do you want to enable them?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Open the location settings screen to allow the user to enable GPS
+                    val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(settingsIntent)
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
     }
 

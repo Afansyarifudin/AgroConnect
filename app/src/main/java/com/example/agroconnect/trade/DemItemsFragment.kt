@@ -6,19 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.agroconnect.R
+import com.example.agroconnect.databinding.FragmentDemItemsBinding
 import com.example.agroconnect.databinding.FragmentSupItemsBinding
 import com.example.agroconnect.datamodel.Product
 import com.google.gson.Gson
 
-class SupItemsFragment : Fragment() {
-    private var _binding: FragmentSupItemsBinding? = null
+class DemItemsFragment : Fragment() {
+    private var _binding: FragmentDemItemsBinding? = null
     private val binding get() = _binding!!
 
     companion object {
         private const val ARG_PRODUCT_JSON = "arg_product_json"
 
-        fun newInstance(productJson: String): SupItemsFragment {
-            val fragment = SupItemsFragment()
+        fun newInstance(productJson: String): DemItemsFragment {
+            val fragment = DemItemsFragment()
             val args = Bundle()
             args.putString(ARG_PRODUCT_JSON, productJson)
             fragment.arguments = args
@@ -32,7 +33,7 @@ class SupItemsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSupItemsBinding.inflate(inflater, container, false)
+        _binding = FragmentDemItemsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -45,8 +46,6 @@ class SupItemsFragment : Fragment() {
         binding.tvName.text = product.name
         binding.tvAmount.text = "Amount: " + product.amount.toString()
         binding.tvLocation.text = "Location: " + product.location
-        binding.tvCropdate.text = "Crop Date: " + product.cropDate
-        binding.tvExpdate.text = "Exp Date: " + product.estimateExp
         binding.tvUser.text = "User: " + product.user?.username
         binding.tvCategory.text = "Category: " + product.category?.name
 

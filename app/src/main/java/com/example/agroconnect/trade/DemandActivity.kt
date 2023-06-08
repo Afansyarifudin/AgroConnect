@@ -16,11 +16,13 @@ import android.location.LocationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.provider.Settings
 import android.telephony.TelephonyCallback.CellLocationListener
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.requestLocationUpdates
@@ -129,12 +131,6 @@ class DemandActivity : AppCompatActivity(), LocationListener {
 
         binding.btnGetLocation.setOnClickListener {
             getLocation()
-
-        }
-
-        binding.backButton.setOnClickListener{
-            val mainActivity = Intent(this, MainActivity::class.java)
-            startActivity(mainActivity)
         }
 
         binding.btnDemcreate.setOnClickListener {
@@ -174,11 +170,7 @@ class DemandActivity : AppCompatActivity(), LocationListener {
             if (productData != null) {
                 val name = productData.name
                 Toast.makeText(this, "Product $name has been added successfully!", Toast.LENGTH_SHORT).show()
-//                val mainActivity = Intent(this, MainActivity::class.java)
-//                startActivity(mainActivity)
-                // Do something with the productData in the activity
-                // For example, update UI elements with the product details
-                // You can access the properties of productData like productData.name, productData.amount, etc.
+//
             }
         }
 
@@ -237,6 +229,25 @@ class DemandActivity : AppCompatActivity(), LocationListener {
             }
         }
     }
+
+    override fun onProviderDisabled(provider: String) {
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            // The GPS provider is disabled, show a dialog to prompt the user to enable it
+            AlertDialog.Builder(this)
+                .setMessage("Location services are disabled. Do you want to enable them?")
+                .setPositiveButton("Yes") { _, _ ->
+                    // Open the location settings screen to allow the user to enable GPS
+                    val settingsIntent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    startActivity(settingsIntent)
+                }
+                .setNegativeButton("No") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
+        }
+    }
+
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)

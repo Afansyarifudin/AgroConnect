@@ -18,6 +18,9 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
     private val _products = MutableLiveData<List<Product>>()
     val products: LiveData<List<Product>> get() = _products
 
+    private val _demands = MutableLiveData<List<Demand>>()
+    val demands: MutableLiveData<List<Demand>> get() = _demands
+
     private val _productData = MutableLiveData<Product?>()
     val productData: MutableLiveData<Product?> get() = _productData
 
@@ -105,6 +108,96 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
             }
         }
     }
+
+    fun searchProductsByCategory(query: String, categoryId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = apiService.searchProducts(query)
+                val productResponse = response.body()
+                val productList = productResponse!!.data
+                val filteredList = productList.filter { it.categoryId == categoryId }
+                if (filteredList.isNullOrEmpty()) {
+                    _searchResultEmpty.value = true
+                    _products.value = filteredList
+                } else {
+                    _searchResultEmpty.value = false
+                    _products.value = filteredList
+                }
+                // Handle API error
+            } catch (e: Exception) {
+                // Handle network error
+            }
+        }
+    }
+
+    fun searchDemand(query: String) {
+        viewModelScope.launch {
+            try {
+                val response = apiService.searchDemands(query)
+                val demandResponse = response.body()
+                val demandList = demandResponse!!.data
+//                val fullProductResponse = apiService.getDetailProducts(productList[0].categoryId)
+                Log.d("ProductViewModel", "Response Category: ${demandList?.get(0)?.categoryId}")
+                Log.d("ProductViewModel", "Response: $demandList")
+                if (demandList.isNullOrEmpty()) {
+                    _searchResultEmpty.value = true
+                    _demands.value = demandList
+                } else {
+                    _searchResultEmpty.value = false
+                    _demands.value = demandList
+                }
+                // Handle API error
+            } catch (e: Exception) {
+                // Handle network error
+            }
+        }
+    }
+
+    fun searchDemandByCategory(query: String, categoryId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = apiService.searchDemands(query)
+                val demandResponse = response.body()
+                val demandList = demandResponse!!.data
+                val filteredList = demandList.filter { it.categoryId == categoryId }
+                if (filteredList.isNullOrEmpty()) {
+                    _searchResultEmpty.value = true
+                    _demands.value = filteredList
+                } else {
+                    _searchResultEmpty.value = false
+                    _demands.value = filteredList
+                }
+                // Handle API error
+            } catch (e: Exception) {
+                // Handle network error
+            }
+        }
+    }
+
+    fun getAllDemand(categoryId: Int, userId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = apiService.getAllDemands()
+                val demandAllResponse = response.body()
+                val demandAllList = demandAllResponse!!.data
+                val filteredList = demandAllList.filter {
+                    it.categoryId == categoryId && it.userId == userId
+                }
+
+                Log.d("ProductViewModel", "Fetch user $userId and category $categoryId")
+                if (filteredList.isNullOrEmpty()) {
+                    _demands.value = filteredList
+                } else {
+                    _demands.value = filteredList
+                }
+
+
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
     private fun showToast(message: String) {
         val context = getApplication<Application>()
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
