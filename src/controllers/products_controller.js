@@ -29,7 +29,8 @@ controller.getProductByName = async (req, res) => {
         var condition = productName ? { name: { [Op.like]: `%${productName}%` } } : null;
 
         const data = await Product.findAll({
-            where: condition
+            where: condition,
+            include: ['Category', 'User']
         });
 
         if (data.length === 0) {

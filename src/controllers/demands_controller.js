@@ -156,7 +156,8 @@ controller.getDemandsbyName = async (req, res) => {
         var condition = demandsName ? { name: { [Op.iLike]: `%${demandsName}%` } } : null;
 
         const data = await Demand.findAll({
-            where: condition
+            where: condition,
+            include: ['Category', 'User']
         });
 
         if (data.length === 0) {
