@@ -17,7 +17,7 @@ app=Flask(__name__)
 #                         host=os.getenv("DB_HOST"), 
 #                         port="5432")
 
-# conn = psycopg2.connect(database="agroconnect_db", user="postgres", password="admin123", host="34.128.110.93", port="5432")
+# conn = psycopg2.connect(database="agroconnect_db_prod", user="postgres", password="agroconnect", host="34.128.87.179", port="5432")
 
 # query for database
 # cur.execute()
@@ -88,10 +88,10 @@ def index():
 def get_all_products():
     try:
         #connection to db
-        conn = psycopg2.connect(database="agroconnect_db", 
+        conn = psycopg2.connect(database="agroconnect_db_prod", 
                                 user="postgres", 
-                                password="admin123", 
-                                host="34.128.110.93", 
+                                password="agroconnect", 
+                                host="34.128.87.179", 
                                 port="5432")
 
         #create a cursor 
@@ -117,10 +117,10 @@ def get_all_products():
 @app.route("/farmer")
 def get_data_farmer():
     try:
-        conn = psycopg2.connect(database="agroconnect_db", 
+        conn = psycopg2.connect(database="agroconnect_db_prod", 
                                 user="postgres", 
-                                password="admin123", 
-                                host="34.128.110.93", 
+                                password="agroconnect", 
+                                host="34.128.87.179", 
                                 port="5432")
 
         #create a cursor 
@@ -131,10 +131,10 @@ def get_data_farmer():
         SELECT u.username AS "Name",
             SPLIT_PART(p.location, ',', 1) AS "Lat",
             SPLIT_PART(p.location, ',', 2) AS "Long",
-            SUM(CASE WHEN c.id = 1 THEN p.amount ELSE 0 END) AS "Commodity_1",
-            SUM(CASE WHEN c.id = 2 THEN p.amount ELSE 0 END) AS "Commodity_2",
-            SUM(CASE WHEN c.id = 3 THEN p.amount ELSE 0 END) AS "Commodity_3",
-            SUM(CASE WHEN c.id = 4 THEN p.amount ELSE 0 END) AS "Commodity_4",
+            SUM(CASE WHEN c.id = 7 THEN p.amount ELSE 0 END) AS "Commodity_1",
+            SUM(CASE WHEN c.id = 8 THEN p.amount ELSE 0 END) AS "Commodity_2",
+            SUM(CASE WHEN c.id = 9 THEN p.amount ELSE 0 END) AS "Commodity_3",
+            SUM(CASE WHEN c.id = 10 THEN p.amount ELSE 0 END) AS "Commodity_4",
             SUM(CASE WHEN c.id = 5 THEN p.amount ELSE 0 END) AS "Commodity_5",
             SUM(CASE WHEN c.id = 6 THEN p.amount ELSE 0 END) AS "Commodity_6"
         FROM public."Products" p
