@@ -1,5 +1,6 @@
 const {Category} = require('../models');
 const controller = {};
+const { Op } = require('sequelize');
 
 controller.findAllCategories = async (req, res) => {
     try {
@@ -56,6 +57,38 @@ controller.createCategory = async (req, res) => {
         res.status(404).json({
             message: error
         })
+    }
+}
+
+controller.getCategoriesbyName = async (req, res) => {
+    try {
+        const categoryName = req.query.name;
+
+        const categories = await Category.findAll({
+            where: {
+                name: {
+                    [Op.iLike]: `%${categoryName}%`
+                }
+            }
+        });
+
+        if (categories.length === 0) {
+            return res.status(404).json({
+                status: "Not Found",
+                message: "Category Not Found"
+            });
+        }
+
+        return res.status(200).json({
+            status: "Ok",
+            message: "Success Get Categories",
+            categories
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: error
+        });
     }
 }
 
