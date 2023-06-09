@@ -52,7 +52,7 @@ Run this command to create database
 npx sequelize-cli db:create
 ``` 
 > **Warning**
-> If create db is not successfully. check database is already use or not. You may check your `.env` configuration 
+> If create db is not successfully. check database is already use or not or may check your `.env` configuration 
 >
 Run this to create migration 
 ```bash
@@ -80,31 +80,31 @@ http://localhost:3000
 
     Users Routes :
 	    POST("/users/register")
-		POST("/users/login")
+	POST("/users/login")
 
     Categories Routes :
 	    GET("/categories") 
         GET("/categories/search")     
-		GET("/categories/:categoryId")     
-		POST("/categories")
-		PUT("/categories/:categoryId")     
-		DELETE("/categories/:categoryId")  
+	GET("/categories/:categoryId")     
+	POST("/categories")
+	PUT("/categories/:categoryId")     
+	DELETE("/categories/:categoryId")  
 
     Products Routes :
 	    GET("/products")
         GET("/products/search")               
-		GET("/products/:productId")     
-		POST("/products")
-		PUT("/products/:productId")     
-		DELETE("/products/:productId")  
+	GET("/products/:productId")     
+	POST("/products")
+	PUT("/products/:productId")     
+	DELETE("/products/:productId")  
 
     Demands Routes :
 	    GET("/demands")
         GET("/demands/search")       
-		GET("/demands/:demandId")     
-		POST("/demands")
-		PUT("/demands/:demandId")     
-		DELETE("/demands/:demandId")  
+	GET("/demands/:demandId")     
+	POST("/demands")
+	PUT("/demands/:demandId")     
+	DELETE("/demands/:demandId")  
 
 ## Contributing
 
