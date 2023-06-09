@@ -5,6 +5,7 @@ import tensorflow as tf
 import json
 from dotenv import load_dotenv
 import psycopg2
+import geopy.distance
 
 load_dotenv()
 
@@ -28,6 +29,16 @@ app=Flask(__name__)
 # close the cursor and connection
 # cur.close()
 # conn.close()
+def nearestCluster(centroids, coor_supp):
+    N, M = centroids.shape
+    lst_coor = np.zeros(N)
+    for i, data in enumerate(centroids):
+      lst_coor[i] = geopy.distance.geodesic(data, coor_supp).km
+    sorted_indices = np.argsort(lst_coor)  # Sort the indices based on distances
+    # top_clusters = sorted_indices[:k]  # Get the top k closest clusters
+    return (np.argmin(lst_coor), min(lst_coor),list(sorted_indices))    
+
+    pass
 def predict_location(clusters_n, iteration_n, array_location):
     points = tf.constant(array_location)
     centroids = tf.constant(tf.slice(tf.compat.v1.random_shuffle(points), [0, 0], [clusters_n, -1]))
@@ -61,7 +72,7 @@ def predict_location(clusters_n, iteration_n, array_location):
     lst_centroid = []
     for i, point in enumerate(array_location):
         lst_centroid.append(predict(point, centroids).numpy()[0])
-    return lst_centroid
+    return centroids, lst_centroid
 
 def get_commodity_score(farmer_data, supplier_data):
     farmer_size,_ = farmer_data.shape
@@ -203,6 +214,7 @@ def get_data_farmer():
 def get_score():
     try:
         args = request.args.getlist('supplier_data')
+        supplier_location = np.array(args[1:3]).reshape(1,2).astype(float)
         supplier_data = np.array(args[3:]).reshape(1,6).astype(int)
         farmer_data = pd.read_json(get_data_farmer())
         final_commodity_score,farmer_size = get_commodity_score(farmer_data, supplier_data)
@@ -213,15 +225,22 @@ def get_score():
 
         clusters_n = int(np.sqrt(farmer_size/2))
         iteration_n = 100
-        lst_centroid = predict_location(clusters_n, iteration_n, array_location)
+        centroids, lst_centroid = predict_location(clusters_n, iteration_n, array_location)
 
         #add the cluster and score to the dataframe
         labeled_farmer_data = farmer_data.copy()
         labeled_farmer_data['Cluster'] = lst_centroid
         labeled_farmer_data['Score'] = final_commodity_score
-        labeled_farmer_data.sort_values(by=['Score','Cluster'], ascending=False, inplace=True)
         # print(labeled_farmer_data.to_json(orient='records'))
-        return labeled_farmer_data.head(5).to_json(orient='records')
+        nearest_cluster, nearest_distance, top_cluster = nearestCluster(np.array(centroids),supplier_location)
+        print(nearest_cluster, nearest_distance, top_cluster)
+
+
+        labeled_farmer_data['Location_rank'] = labeled_farmer_data['Cluster'].apply(lambda cluster: top_cluster.index(cluster) + 1)
+        labeled_farmer_data.sort_values(by=['Score','Location_rank'], ascending=[False,True], inplace=True)
+        # print(labeled_farmer_data.head(5))
+        
+        return labeled_farmer_data.drop(['Cluster'],axis=1).head(5).to_json(orient='records')
     except Exception as e:
         print("Failed to get score:", e)
         return str(e)
