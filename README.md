@@ -39,7 +39,7 @@ npm install
 > **Note**
 > Make sure you have installed postgreSQL
 >
-Copy `.env.example` and rename to be .env then paste all the value insile `.env` using 
+Copy `.env.example` and rename to be .env then copy inside `.env.example` paste all the value into `.env` using 
 ```bash
 cp .env.example .env
 ``` 
