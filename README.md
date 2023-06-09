@@ -1,5 +1,15 @@
-# AgroConnect
-AgroConnect-Bangkit Capstone Project C23-PS127
+<div align="center">
+
+<!--lint ignore no-dead-urls-->
+
+# AgroConnect 
+
+Supply chain app of farmer. The game-changer that brings farmers, suppliers, and customers together!
+
+<img width="122" src="https://github.com/Afansyarifudin/AgroConnect/assets/68774609/1de150f1-d48c-4101-9df1-e15ffc7803cb" alt="AgroConnect">  
+
+</div>
+
 
 ## Before Develop
 - Run `git pull` to update you local with remote in github
@@ -49,4 +59,17 @@ http://localhost:3000
 		POST("/demands")
 		PUT("/demands/:demandId")     
 		DELETE("/demands/:demandId")  
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+## Contributor 
+
+Developed by C23-PS127 Bangkit Capstone Team
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
 
