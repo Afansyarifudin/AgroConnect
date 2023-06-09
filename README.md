@@ -76,8 +76,8 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 [Postman Documentation](https://documenter.getpostman.com/view/24922206/2s93m8zLPs)
 
     Users Routes :
-	    POST("/users/register")
-	POST("/users/login")
+	    	POST("/users/register")
+		POST("/users/login")
 
     Categories Routes :
 	    	GET("/categories") 
