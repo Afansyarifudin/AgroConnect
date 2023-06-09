@@ -6,14 +6,13 @@
 
 Supply chain app of farmer. The game-changer that brings farmers, suppliers, and customers together!
 
-<img width="122" src="https://user-images.githubusercontent.com/7565692/35311593-3edd9102-00f2-11e8-98fb-38be1d0e650f.png" alt="logo of docsify-awesome repository">
+<img width="122" src="https://github.com/Afansyarifudin/AgroConnect/assets/68774609/af0e2940-766f-4b57-a161-69ff71ea6bc5" alt="AgroConnect">
+  ![AgroCOnnect](https://github.com/Afansyarifudin/AgroConnect/assets/68774609/af0e2940-766f-4b57-a161-69ff71ea6bc5)
+
+  
 
 </div>
 
-
-# AgroConnect
-
-AgroConnect-Bangkit Capstone Project C23-PS127
 
 ## Installation
 
@@ -36,6 +35,10 @@ There are 5 main branch for the development of this app
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
+
+## Contributor 
+
+Developed by C23-PS127 Bangkit Capstone Team
 
 ## License
 
