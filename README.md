@@ -18,47 +18,6 @@ Supply chain app of farmer. The game-changer that brings farmers, suppliers, and
 > This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
 
 ## Usage
-### Before Develop
-Update you local repo with remote using
-```bash
-git pull 
-``` 
-Checkout to branch `api-dev` if you're already skip this 
-```bash
-git checkout api-dev
-``` 
-Run this command to install node modules 
-```bash
-npm install
-``` 
-
-### Run in your local 
-> **Note**
-> Make sure you have installed postgreSQL
->
-Copy `.env.example` and rename to be .env then copy inside `.env.example` paste all the value into `.env` using 
-```bash
-cp .env.example .env
-``` 
-Change directory to src using 
-```bash
-cd src
-``` 
-Run this command to create database 
-```bash
-npx sequelize-cli db:create
-``` 
-> **Warning**
-> If create db is not successfully. check database is already use or not or may check your `.env` configuration 
->
-Run this to create migration 
-```bash
-npx sequelize-cli db:migrate
-```
-Run this to for database seeder (optional)
-```bash
-npx sequelize-cli db:seed:all
-```
 
 ## Description 
 This is a project of NodeJS using ExpressJS framework and detailed tech stack below 
@@ -69,6 +28,9 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 | Postman       | API test endpoint |
 | Sequalize    | ORM database  | 
 | Docker       | Build image | 
+| Cloud Run    | Serverless deployment |
+| Artifacts Registry | Store image |
+| Github Action | Pipeline for Deployment |
 
 
 ## API Specification
