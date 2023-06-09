@@ -15,7 +15,7 @@ Supply chain app of farmer. The game-changer that brings farmers, suppliers, and
 
 ## Installation
 > **Warning**
-> This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/edit/api-dev)
+> This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
 
 ## Usage
 ### Before Develop
@@ -105,7 +105,7 @@ http://localhost:3000
 
 ## Contributing
 
-Please make pull request on branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/edit/api-dev)
+Please make pull request on branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
 
 ## Contributor 
 
