@@ -2,7 +2,7 @@
 
 <!--lint ignore no-dead-urls-->
 
-# AgroConnect-API
+# AgroConnect-Machine Learning-API
 ![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/Afansyarifudin/AgroConnect/deploy.yml)
 ![GitHub watchers](https://img.shields.io/github/watchers/Afansyarifudin/AgroConnect?style=social)![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Afansyarifudin/AgroConnect/api-dev)
 
