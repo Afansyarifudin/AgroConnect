@@ -6,10 +6,7 @@
 
 Supply chain app of farmer. The game-changer that brings farmers, suppliers, and customers together!
 
-<img width="122" src="https://github.com/Afansyarifudin/AgroConnect/assets/68774609/af0e2940-766f-4b57-a161-69ff71ea6bc5" alt="AgroConnect">
-  ![AgroCOnnect](https://github.com/Afansyarifudin/AgroConnect/assets/68774609/af0e2940-766f-4b57-a161-69ff71ea6bc5)
-
-  
+<img width="122" src="https://github.com/Afansyarifudin/AgroConnect/assets/68774609/af0e2940-766f-4b57-a161-69ff71ea6bc5" alt="AgroConnect">  
 
 </div>
 
