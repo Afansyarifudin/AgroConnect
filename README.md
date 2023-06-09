@@ -18,6 +18,8 @@ Supply chain app of farmer. The game-changer that brings farmers, suppliers, and
 > This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
 
 ## Usage
+> **Warning**
+> This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
 
 ## Description 
 This is a project of NodeJS using ExpressJS framework and detailed tech stack below 
