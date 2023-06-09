@@ -83,28 +83,28 @@ http://localhost:3000
 	POST("/users/login")
 
     Categories Routes :
-	    GET("/categories") 
-        GET("/categories/search")     
-	GET("/categories/:categoryId")     
-	POST("/categories")
-	PUT("/categories/:categoryId")     
-	DELETE("/categories/:categoryId")  
+	    	GET("/categories") 
+        	GET("/categories/search")     
+		GET("/categories/:categoryId")     
+		POST("/categories")
+		PUT("/categories/:categoryId")     
+		DELETE("/categories/:categoryId")  
 
     Products Routes :
-	    GET("/products")
-        GET("/products/search")               
-	GET("/products/:productId")     
-	POST("/products")
-	PUT("/products/:productId")     
-	DELETE("/products/:productId")  
+	    	GET("/products")
+        	GET("/products/search")               
+		GET("/products/:productId")     
+		POST("/products")
+		PUT("/products/:productId")     
+		DELETE("/products/:productId")  
 
     Demands Routes :
-	    GET("/demands")
-        GET("/demands/search")       
-	GET("/demands/:demandId")     
-	POST("/demands")
-	PUT("/demands/:demandId")     
-	DELETE("/demands/:demandId")  
+	    	GET("/demands")
+        	GET("/demands/search")       
+		GET("/demands/:demandId")     
+		POST("/demands")
+		PUT("/demands/:demandId")     
+		DELETE("/demands/:demandId")  
 
 ## Contributing
 
