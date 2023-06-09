@@ -21,7 +21,7 @@ git clone https://github.com/Afansyarifudin/AgroConnect
 
 ## Usage
 
-There are 5 main branch for the development of this app
+There are 4 main branch for the development of this app
 - [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev) for development of agroconnect-api
 - [ml-api](https://github.com/Afansyarifudin/AgroConnect/tree/ml-api) for development and production agroconnect-ml-api
 - [machine-learning](https://github.com/Afansyarifudin/AgroConnect/tree/machine-learning) for training the machine learning model 
