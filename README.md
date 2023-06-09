@@ -73,7 +73,7 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 
 ## API Specification
 
-http://localhost:3000
+[Postman Documentation](https://documenter.getpostman.com/view/24922206/2s93m8zLPs)
 
     Users Routes :
 	    POST("/users/register")
