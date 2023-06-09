@@ -1,22 +1,90 @@
-# AgroConnect ML API
-AgroConnect-Bangkit Capstone Project C23-PS127
+<div align="center">
 
-# How to Setup
-1. `git pull`
-2. `git checkout ml-api`
-3. `docker build -t agroconnect-ml-api .`
-4. `docker run --rm -p 5000:5000 agroconnect-ml-api` make sure you have docker installed on you local --rm to delete the container when it didin't use 
-5. `docker container ls -la` to see all container that's running on you local 
-6. `docker container stop <container-id>` to stop you running container 
+<!--lint ignore no-dead-urls-->
 
+# AgroConnect-API
+![GitHub Workflow Status (with branch)](https://img.shields.io/github/actions/workflow/status/Afansyarifudin/AgroConnect/deploy.yml)
+![GitHub watchers](https://img.shields.io/github/watchers/Afansyarifudin/AgroConnect?style=social)![GitHub last commit (branch)](https://img.shields.io/github/last-commit/Afansyarifudin/AgroConnect/api-dev)
+
+Supply chain app of farmer. The game-changer that brings farmers, suppliers, and customers together!
+
+<img width="122" src="https://github.com/Afansyarifudin/AgroConnect/assets/68774609/1de150f1-d48c-4101-9df1-e15ffc7803cb" alt="AgroConnect">  
+
+</div>
+
+## Installation
+clone 
+```bash
+git clone --branch ml-api https://github.com/Afansyarifudin/AgroConnect
+``` 
+
+## Usage
+### Before Develop
+Update you local repo with remote using
+```bash
+git pull 
+``` 
+Checkout to branch `ml-api` if you're already skip this 
+```bash
+git checkout ml-api
+``` 
+
+### Run in your local using docker 
+> **Note**
+> Make sure you have installed docker or docker desktop 
+>
+Build the image using this command 
+```bash
+docker build -t agroconnect-ml-api .
+``` 
+> **Note**
+> If you are getting error that cannt find dockerfile or no such file to build 
+> change directory into AgroConnect and make sure you are in the `ml-api` branch 
+Run docker image that has been builded before
+```bash
+docker run --rm -p 5000:5000 agroconnect-ml-api
+``` 
+Run this command to list all container that's running in your local 
+```bash
+docker container ls -la
+``` 
+to stop container that's running using 
+```bash
+docker container stop <REPLACE WITH YOU CONTAINER ID>
+```
+or just press `Ctrl + C`
+
+### Run in your local without docker 
+To run without docker just run using this command 
+```bash
+pip install -r requirements.txt
+```
+> **Note**
+> Make sure you have minimum python 3.10.0 install 
+>
+To run the web server using this 
+```bash
+python main.py
+```
+
+## Description 
+This is a project of Python and Flask framework and detailed tech stack below 
+| Tech          | Used as       |
+| ------------- | ------------- |
+| Flask    | Framework     |
+| PostgreSQL         | Database     |
+| Postman       | API test endpoint |
+| Docker       | Build image | 
+| Tensorflow  | Machine Learning | 
 
 ## API Documentation 
 
+http://localhost:5000
+
     Products Routes :
 	    GET("/products")   
-
-    Farmers Routes :
-	    GET("/farmer")             
+	    GET("/farmer") 
+	    GET("/getScore?")
 
 ## Example of the URL for getting the score
     http://localhost:5000/getScore?supplier_data=Andi&supplier_data=-7&supplier_data=106&supplier_data=0&supplier_data=0&supplier_data=2000&supplier_data=200&supplier_data=0&supplier_data=0
@@ -26,3 +94,16 @@ AgroConnect-Bangkit Capstone Project C23-PS127
 
     - The higher the Score, the better
     - The lower the Location_rank, the better
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+## Contributor 
+
+Developed by C23-PS127 Bangkit Capstone Team
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
