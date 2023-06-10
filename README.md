@@ -78,4 +78,3 @@ Developed by C23-PS127 Bangkit Capstone Team
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
-

@@ -180,4 +180,28 @@ controller.getDemandsbyName = async (req, res) => {
     }
 }
 
+controller.getUsersDemand = async (req, res) => {
+    try {
+        const userId = req.user.user_id;
+
+        const data = await Demand.findAll({
+            where: {
+                user_id: userId
+            }, 
+            include: ['Category', 'User']
+        });
+
+        res.status(200).json({
+            status: "Ok",
+            message: "Seccess get user demand's data",
+            data: data
+        })
+
+    } catch (error) {
+        res.status(404).json({
+            message: error
+        });
+    }
+}
+
 module.exports = controller;
