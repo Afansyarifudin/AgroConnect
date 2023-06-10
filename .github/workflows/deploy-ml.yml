@@ -22,7 +22,7 @@
             
             - name: Configure Docker to use gcloud 
               run: | 
-                gcloud auth configure asia-southeast2-docker.pkg.dev --quiet
+                gcloud auth configure-docker asia-southeast2-docker.pkg.dev --quiet
 
             - name: Build Image and push docker image 
               run: | 
