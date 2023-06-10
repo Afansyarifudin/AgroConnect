@@ -72,6 +72,9 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 | Postman       | API test endpoint |
 | Sequalize    | ORM database  | 
 | Docker       | Build image | 
+| Cloud Run    | Serverless deployment |
+| Artifacts Registry | Store image |
+| Github Action | Pipeline for Deployment |
 
 
 ## API Specification
@@ -100,7 +103,8 @@ http://localhost:3000
 
     Demands Routes :
 	    	GET("/demands")
-        	GET("/demands/search")       
+        	GET("/demands/search") 
+		GET("/demands/users")
 		GET("/demands/:demandId")     
 		POST("/demands")
 		PUT("/demands/:demandId")     
