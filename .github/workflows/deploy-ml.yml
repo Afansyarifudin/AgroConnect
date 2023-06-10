@@ -1,0 +1,38 @@
+
+  name: Deploy ML to Cloud Run 
+
+  on:
+    push:
+        branches: 
+            - ml-api
+
+  jobs:
+    deploy: 
+        runs-on: ubuntu-latest
+
+        steps: 
+            - name: Checkout Code 
+              uses: actions/checkout@v2
+
+            - name: Set Up Cloud SDK 
+              uses: google-github-actions/setup-gcloud@v0.2.0
+              with: 
+                project_id: capstone-c23-ps127
+                service_account_key: ${{secrets.GCLOUD_AUTH}}
+            
+            - name: Configure Docker to use gcloud 
+              run: | 
+                gcloud auth configure asia-southeast2-docker.pkg.dev --quiet
+
+            - name: Build Image and push docker image 
+              run: | 
+                export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
+                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect-ml/agroconnect-ml-api:${IMAGE_TAG}
+                docker build -t ${IMAGE_NAME} .
+                docker push ${IMAGE NAME}
+
+            - name: Deploy ML to Cloud Run 
+              run: | 
+                export IMAGE_TAG=$(git rev-parse --short ${{github.sha}})
+                export IMAGE_NAME=asia-southeast2-docker.pkg.dev/capstone-c23-ps127/agroconnect-ml/agroconnect-ml-api:${IMAGE_TAG}
+                gcloud run deploy agroconnect-ml --image ${IMAGE_NAME} --region asia-southeast2 --allow-unauthenticated
