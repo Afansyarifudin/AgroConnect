@@ -80,6 +80,7 @@ This is a project of Python and Flask framework and detailed tech stack below
 ## API Documentation 
 
 http://localhost:5000
+[Api Documentation](https://documenter.getpostman.com/view/24922206/2s93sc4Xex)
 
     Products Routes :
 	    GET("/products")   
