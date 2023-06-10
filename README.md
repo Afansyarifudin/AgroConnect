@@ -14,12 +14,54 @@ Supply chain app of farmer. The game-changer that brings farmers, suppliers, and
 </div>
 
 ## Installation
-> **Warning**
-> This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
+Clone this branch to you local computer using 
+
+```bash
+git clone --branch api-dev https://github.com/Afansyarifudin/AgroConnect
+```
 
 ## Usage
+### Before Develop
+Update you local repo with remote using
+```bash
+git pull 
+``` 
+Checkout to branch `api-dev` if you're already skip this 
+```bash
+git checkout api-dev
+``` 
+Run this command to install node modules 
+```bash
+npm install
+``` 
+
+### Run in your local 
+> **Note**
+> Make sure you have installed postgreSQL
+>
+Copy `.env.example` and rename to be .env then copy inside `.env.example` paste all the value into `.env` using 
+```bash
+cp .env.example .env
+``` 
+Change directory to src using 
+```bash
+cd src
+``` 
+Run this command to create database 
+```bash
+npx sequelize-cli db:create
+``` 
 > **Warning**
-> This branch is used only for production. For development please use branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
+> If create db is not successfully. check database is already use or not or may check your `.env` configuration 
+>
+Run this to create migration 
+```bash
+npx sequelize-cli db:migrate
+```
+Run this to for database seeder (optional)
+```bash
+npx sequelize-cli db:seed:all
+```
 
 ## Description 
 This is a project of NodeJS using ExpressJS framework and detailed tech stack below 
@@ -37,7 +79,7 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 
 ## API Specification
 
-[Postman Documentation](https://documenter.getpostman.com/view/24922206/2s93m8zLPs)
+http://localhost:3000
 
     Users Routes :
 	    	POST("/users/register")
@@ -61,7 +103,8 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 
     Demands Routes :
 	    	GET("/demands")
-        	GET("/demands/search")       
+        	GET("/demands/search") 
+		GET("/demands/users")
 		GET("/demands/:demandId")     
 		POST("/demands")
 		PUT("/demands/:demandId")     
@@ -69,7 +112,8 @@ This is a project of NodeJS using ExpressJS framework and detailed tech stack be
 
 ## Contributing
 
-Please make pull request on branch [api-dev](https://github.com/Afansyarifudin/AgroConnect/tree/api-dev)
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
 
 ## Contributor 
 
