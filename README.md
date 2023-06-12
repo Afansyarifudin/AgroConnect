@@ -10,12 +10,6 @@ Supply chain app of farmer. The game-changer that brings farmers, suppliers, and
 
 </div>
 
-
-
-# AgroConnect
-
-AgroConnect is an innovative mobile application designed to connect farmers (suppliers) and buyers so their can trade crops for the buyer needs. Its main purpose is to reduce food loss.
-
 ## Features
 
 COMING SOON
