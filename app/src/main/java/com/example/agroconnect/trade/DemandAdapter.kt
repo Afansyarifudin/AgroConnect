@@ -1,5 +1,8 @@
 package com.example.agroconnect.trade
 
+import android.content.Context
+import android.location.Address
+import android.location.Geocoder
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
@@ -12,15 +15,17 @@ import com.example.agroconnect.databinding.ItemProductBinding
 import com.example.agroconnect.datamodel.Demand
 import com.example.agroconnect.datamodel.Product
 import com.google.gson.Gson
+import java.io.IOException
+import java.util.*
 
 
-class DemandAdapter : RecyclerView.Adapter<DemandAdapter.DemandViewHolder>() {
+class DemandAdapter(private val context: Context) : RecyclerView.Adapter<DemandAdapter.DemandViewHolder>() {
 
     private var demands: List<Demand> = listOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DemandViewHolder {
         val binding = ItemProductBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DemandViewHolder(binding)
+        return DemandViewHolder(binding, context)
     }
 
     override fun onBindViewHolder(holder: DemandViewHolder, position: Int) {
@@ -33,13 +38,60 @@ class DemandAdapter : RecyclerView.Adapter<DemandAdapter.DemandViewHolder>() {
     }
 
 
-    inner class DemandViewHolder(private val binding: ItemProductBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class DemandViewHolder(private val binding: ItemProductBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
+        private fun splitLatLng(input: String): Pair<Double, Double>? {
+            val latLng = input.split(",")
+            if (latLng.size == 2) {
+                val latitude = latLng[0].toDoubleOrNull()
+                val longitude = latLng[1].toDoubleOrNull()
+                if (latitude != null && longitude != null) {
+                    return Pair(latitude, longitude)
+                }
+            }
+            return null
+        }
+
+        private fun getAddressFromLatLng(context: Context, latitude: Double, longitude: Double): String? {
+            val geocoder = Geocoder(context, Locale.getDefault())
+            var addressText: String? = null
+            try {
+                val addresses: List<Address>? = geocoder.getFromLocation(latitude, longitude, 1)
+                if (addresses != null && addresses.isNotEmpty()) {
+                    val address: Address = addresses[0]
+                    val sb = StringBuilder()
+                    for (i in 0 until address.maxAddressLineIndex) {
+                        sb.append(address.getAddressLine(i)).append(", ")
+                    }
+                    sb.append(address.locality)
+                    addressText = sb.toString()
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            return addressText
+        }
+
         fun bind(demand: Demand?) {
             binding.apply {
                 if (demand != null) {
                     amountTextView.text = "${demand.amount.toString()} kg"
                     nameTextView.text = demand.name
-                    locationTextView.text = demand.location
+
+                    val latLongPair = demand.location?.let { splitLatLng(it) }
+                    if (latLongPair != null) {
+                        val latitude = latLongPair.first
+                        val longitude = latLongPair.second
+                        val address = getAddressFromLatLng(context, latitude, longitude)
+                        if (address != null) {
+                            locationTextView.text = address
+                            println("Address: $address")
+                        } else {
+                            println("Could not retrieve address.")
+                        }
+                    } else {
+                        print("Invalid input format.")
+                    }
+//                    locationTextView.text = demand.location
 
 
                     // Load and display the avatar image using Glide

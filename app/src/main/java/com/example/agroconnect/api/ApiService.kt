@@ -5,18 +5,18 @@ import com.example.agroconnect.datamodel.*
 import retrofit2.Response
 import retrofit2.http.*
 
+
 interface ApiService {
-//    @FormUrlEncoded
-//    @Headers("Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJlbWFpbCI6ImFmYW5AZ21haWwuY29tIiwiaWF0IjoxNjg1MzgxNjczLCJleHAiOjE2ODUzODg4NzN9.YSsICl6Bo_eE-75WE96TRaymkHj9sC7tG5dsu1bp4C0")
-//    @POST("products")
-//    fun postProdAgro(
-//        @Field("name") name: String,
-//        @Field("amount") amount: Int,
-//        @Field("location") location: String
-//    ): AgroResponse
-    companion object {
-        private const val X_ACCESS_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxNSwiZW1haWwiOiJhZG1pbkBnbWFpbC5jb20iLCJpYXQiOjE2ODYxMjMwOTEsImV4cCI6MTY4NjEzMDI5MX0.eCWzl-Pv7Bcwik_XQOFaumvJewkADd7Y6eDX7lr0ElY"
-    }
+
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
+    @GET("products")
+    suspend fun getProductsML(): Response<List<List<ProductLearningResponse>>>
+
+    @Headers()
+    @GET("getScore")
+    suspend fun getProductsMLQuery(
+        @Query("supplier_data") supplierData: List<String>
+    ) : Response<ProductMachineResponse>
 
     @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
     @GET("products/search")
@@ -35,6 +35,10 @@ interface ApiService {
     @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
     @GET("demands")
     suspend fun getAllDemands(): Response<DemandResponse>
+
+    @Headers("Content-Type: application/json; charset=utf-8", "Accept: application/json; charset=utf-8")
+    @GET("products")
+    suspend fun getAllProducts(): Response<ProductResponse>
 
     @Headers("Content-Type: application/json", "Accept: application/json")
     @POST("users/login")

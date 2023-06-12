@@ -33,7 +33,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Name"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_category"
@@ -41,7 +42,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Category"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_amount"
@@ -49,7 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Amount"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_location"
@@ -57,7 +60,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Location"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_cropdate"
@@ -65,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Crop Date"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_expdate"
@@ -73,7 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Exp Date"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <TextView
                 android:id="@+id/tv_user"
@@ -81,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Supplier"
-                android:textAppearance="?android:textAppearanceMedium" />
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#000000" />
 
             <Button
                 android:id="@+id/btn_order"

@@ -6,6 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
     private const val BASE_URL = "https://agroconnect-api-2ape6j34pa-et.a.run.app/"
+    private const val ML_URL = "https://agroconnect-ml-2ape6j34pa-et.a.run.app/"
 
     fun createApiService(): ApiService {
         val client = OkHttpClient.Builder()
@@ -19,4 +20,18 @@ object ApiConfig {
 
         return retrofit.create(ApiService::class.java)
     }
+
+    fun createApiServiceML(): ApiService {
+        val client = OkHttpClient.Builder()
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(ML_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        return retrofit.create(ApiService::class.java)
+    }
+
 }

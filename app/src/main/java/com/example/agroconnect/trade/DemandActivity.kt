@@ -23,6 +23,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationManagerCompat.requestLocationUpdates
@@ -44,13 +45,14 @@ class DemandActivity : AppCompatActivity(), LocationListener {
     private lateinit var categoryViewModel: CategoryViewModel
     private lateinit var sessionPreferences: SharedPreferences
     private lateinit var locationManager: LocationManager
-//    private lateinit var geocoder: Geocoder
     private val locationPermissionCode = 2
     private var latAndLong = ""
 
     @SuppressLint("ServiceCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         supportActionBar?.hide()
         binding = ActivityDemandBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -116,6 +118,12 @@ class DemandActivity : AppCompatActivity(), LocationListener {
         var isExpDate = false
 
         calendar = Calendar.getInstance()
+
+        binding.backButton.setOnClickListener {
+            val mainActivity = Intent(this@DemandActivity, MainActivity::class.java)
+            startActivity(mainActivity)
+        }
+
 
         binding.etCropdate.onFocusChangeListener = View.OnFocusChangeListener { view, hasFocus ->
             if (hasFocus) {
@@ -193,7 +201,7 @@ class DemandActivity : AppCompatActivity(), LocationListener {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
 
-        datePickerDialog.datePicker.maxDate = System.currentTimeMillis() // Optional: Set a maximum date
+//        datePickerDialog.datePicker.minDate = System.currentTimeMillis() // Optional: Set a maximum date
         datePickerDialog.show()
     }
 

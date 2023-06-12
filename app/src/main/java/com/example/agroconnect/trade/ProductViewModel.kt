@@ -198,6 +198,74 @@ class ProductViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun getAllProducts() {
+        viewModelScope.launch {
+            try {
+                val responseProducts = apiService.getAllProducts()
+                val productAllResponse = responseProducts.body()
+                val productsAllList = productAllResponse!!.data
+//                val filteredListProduct = productsAllList.filter { it.userId == userId }
+                if (productsAllList.isNullOrEmpty()) {
+                    _products.value = productsAllList
+                } else {
+                    _products.value = productsAllList
+                    val filteredListDemandSize = productsAllList.size
+                }
+
+
+
+            } catch (e: Exception) {
+            }
+        }
+    }
+
+    fun getNumberAllDemand(userId: Int) {
+        viewModelScope.launch {
+            try {
+                val responseDemand = apiService.getAllDemands()
+                val demandAllResponse = responseDemand.body()
+                val demandAllList = demandAllResponse!!.data
+                val filteredListDemand = demandAllList.filter {
+                    it.userId == userId
+                }
+
+
+                Log.d("ProductViewModel", "Fetch user $userId")
+                if (filteredListDemand.isNullOrEmpty()) {
+                    _demands.value = filteredListDemand
+                } else {
+                    _demands.value = filteredListDemand
+                    val filteredListDemandSize = filteredListDemand.size
+                }
+
+
+            } catch (e: Exception) {
+
+            }
+        }
+    }
+
+    fun getNumberAllProducts(userId: Int) {
+        viewModelScope.launch {
+            try {
+                val responseProducts = apiService.getAllProducts()
+                val productAllResponse = responseProducts.body()
+                val productsAllList = productAllResponse!!.data
+                val filteredListProduct = productsAllList.filter { it.userId == userId }
+                if (filteredListProduct.isNullOrEmpty()) {
+                    _products.value = filteredListProduct
+                } else {
+                    _products.value = filteredListProduct
+                    val filteredListDemandSize = filteredListProduct.size
+                }
+
+
+
+            } catch (e: Exception) {
+        }
+        }
+    }
+
     private fun showToast(message: String) {
         val context = getApplication<Application>()
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()

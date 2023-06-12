@@ -84,7 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginTop="32dp"
-        android:text="Amount"
+        android:text="Amount (kg)"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_demname"
         app:layout_constraintTop_toBottomOf="@+id/spinner_category" />
@@ -150,6 +150,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="154dp"
         android:ems="10"
+        android:enabled="false"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

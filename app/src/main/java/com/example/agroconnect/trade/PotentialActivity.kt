@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,11 +28,15 @@ class PotentialActivity : AppCompatActivity() {
     private lateinit var adapterDemand: DemandAdapter
     private lateinit var categoryViewModel: CategoryViewModel
     private lateinit var sessionPreferences: SharedPreferences
+//    private lateinit var mapsViewModel: MapsViewModel
     private var selectedCategoryId: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         supportActionBar?.hide()
         binding = ActivityPotentialBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -41,9 +46,12 @@ class PotentialActivity : AppCompatActivity() {
 
         productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
         categoryViewModel = ViewModelProvider(this).get(CategoryViewModel::class.java)
+//        mapsViewModel = ViewModelProvider(this).get(MapsViewModel::class.java)
+
+//        mapsViewModel.getAllProductsML()
 
         val recyclerView: RecyclerView = binding.rvFind
-        adapterDemand = DemandAdapter()
+        adapterDemand = DemandAdapter(this)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapterDemand
         recyclerView.addItemDecoration(

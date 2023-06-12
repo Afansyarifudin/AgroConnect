@@ -5,7 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.lifecycle.ViewModelProvider
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.customview.customView
 import com.bumptech.glide.Glide
@@ -21,14 +24,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var sessionPreferences: SharedPreferences
     private lateinit var networkConnectivityWatcher: NetworkConnectivityWatcher
+    private lateinit var productViewModel: ProductViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         networkConnectivityWatcher = NetworkConnectivityWatcher(this)
         networkConnectivityWatcher.startWatchingConnectivity()
+
+        productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)
 
         sessionPreferences = getSharedPreferences("session", Context.MODE_PRIVATE)
         val loginResponseJson = sessionPreferences.getString("loginResponse", null)
@@ -42,6 +48,27 @@ class MainActivity : AppCompatActivity() {
         val role = loginResponse.user.role
         val avatar = loginResponse.user.avatar
 
+        loginResponse.user.id?.let { productViewModel.getNumberAllDemand(it) }
+        loginResponse.user.id?.let { productViewModel.getNumberAllProducts(it)}
+
+        productViewModel.apply {
+            products.observe(this@MainActivity) {products ->
+                if (products != null) {
+                    val responseNumberAllProducts = products.size
+                    binding.tvTotalsupplieslive.text = responseNumberAllProducts.toString()
+                }
+                Log.d("Main Activiity", "Error, cannot fetch products number data.")
+            }
+
+            demands.observe(this@MainActivity) {demands ->
+                if (demands != null) {
+                    val responseNumberAllDemands = demands.size
+                    binding.tvTotaldemandlive.text = responseNumberAllDemands.toString()
+                }
+                Log.d("Main Activiity", "Error, cannot fetch demands number data.")
+            }
+        }
+
 
         val greeting = when (currentHour) {
             in 0..11 -> "Selamat pagi,"
@@ -51,7 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvGreeting.text = "$greeting"
-        binding.tvUsername.text = "$role $username"
+        binding.tvUsername.text = "$username"
 
         Glide.with(this)
             .load(avatar) // Replace with your actual image URL

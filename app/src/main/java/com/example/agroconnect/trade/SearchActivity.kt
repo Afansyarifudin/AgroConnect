@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +31,10 @@ class SearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
+
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         supportActionBar?.hide()
         binding = ActivitySearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -48,7 +52,7 @@ class SearchActivity : AppCompatActivity() {
         val recyclerView: RecyclerView = binding.rvFind
         if (!isDemand)
         {
-            adapter = ProductAdapter()
+            adapter = ProductAdapter(this)
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter
             recyclerView.addItemDecoration(
@@ -59,7 +63,7 @@ class SearchActivity : AppCompatActivity() {
             )
 
         } else {
-            adapterDemand = DemandAdapter()
+            adapterDemand = DemandAdapter(this)
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapterDemand
             recyclerView.addItemDecoration(
@@ -177,6 +181,7 @@ class SearchActivity : AppCompatActivity() {
                 }
             }
         } else {
+
             if (selectedCategoryId != 0) {
                 productViewModel.searchDemandByCategory(query, selectedCategoryId)
             } else {

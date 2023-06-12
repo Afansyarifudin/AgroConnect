@@ -106,7 +106,7 @@ class LoginFragment : Fragment() {
 
                     Toast.makeText(
                         activity,
-                        "Login success $username and $role, $token",
+                        "Login success!",
                         Toast.LENGTH_SHORT
                     ).show()
 
