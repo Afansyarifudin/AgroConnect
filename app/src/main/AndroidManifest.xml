@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AgroConnect"
         tools:targetApi="31">
+        <activity
+            android:name=".trade.HistoryDetailActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -25,41 +28,33 @@
         <activity
             android:name=".trade.MapsActivity"
             android:exported="false" />
-
         <activity
             android:name=".auth.AuthActivity"
             android:exported="false" />
-
         <activity
             android:name=".trade.PotentialActivity"
             android:exported="false" />
-
         <activity
             android:name=".trade.DemandActivity"
             android:exported="false" />
-
         <activity
             android:name=".trade.SuppliesActivity"
             android:exported="false" />
-
         <activity
             android:name=".trade.TradeActivity"
             android:exported="false" />
-
         <activity
             android:name=".trade.SearchActivity"
             android:exported="false" />
-
         <activity
             android:name=".SplashActivity"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".MainActivity" />
     </application>
 

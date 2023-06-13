@@ -37,9 +37,9 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_login, container, false)
-        etEmail = rootView.findViewById(R.id.et_demname)
-        etPassword = rootView.findViewById(R.id.et_cropdate)
-        btnLogin = rootView.findViewById(R.id.btn_demcreate)
+        etEmail = rootView.findViewById(R.id.et_email)
+        etPassword = rootView.findViewById(R.id.et_password)
+        btnLogin = rootView.findViewById(R.id.btn_login)
         sessionPreferences = requireContext().getSharedPreferences("session", Context.MODE_PRIVATE)
         return rootView
     }

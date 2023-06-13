@@ -45,13 +45,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="?android:attr/actionBarSize"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/tv_demand"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

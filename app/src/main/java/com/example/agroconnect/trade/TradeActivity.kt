@@ -25,6 +25,11 @@ class TradeActivity : AppCompatActivity() {
         // Get the Gson value from the intent extras
         val productJson = intent.getStringExtra("PRODUCT_JSON")
 
+        binding.tradeHistoryLayoutInside.setOnClickListener{
+            val historyDetailActivity = Intent(this@TradeActivity, HistoryDetailActivity::class.java)
+            startActivity(historyDetailActivity)
+        }
+
         // Create a Gson instance
         val gson = Gson()
 
@@ -47,10 +52,8 @@ class TradeActivity : AppCompatActivity() {
 
         }
 
+
         // Use the product object as needed
-
-
-
         binding.backButton.setOnClickListener{
             val mainActivity = Intent(this, MainActivity::class.java)
             startActivity(mainActivity)
