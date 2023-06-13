@@ -8,6 +8,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Typeface
 import android.location.Geocoder
 import android.location.Location
 
@@ -34,6 +35,7 @@ import com.example.agroconnect.Result
 import com.example.agroconnect.databinding.ActivityDemandBinding
 import com.example.agroconnect.datamodel.Category
 import com.example.agroconnect.datamodel.LoginResponse
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.text.SimpleDateFormat
 import java.util.*
@@ -168,7 +170,13 @@ class DemandActivity : AppCompatActivity(), LocationListener {
                     tokenAuth
                 )
             }else {
-                Toast.makeText(this, "Invalid category selected", Toast.LENGTH_SHORT).show()
+                val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                val snackbar = Snackbar.make(rootView, "Invalid category!", Snackbar.LENGTH_LONG)
+                val snackbarView = snackbar.view
+                val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                textView.setTypeface(textView.typeface, Typeface.BOLD)
+                snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                snackbar.show()
                 // Handle error when no category is selected
                 // Display a toast message or show an error dialog
             }
@@ -177,8 +185,13 @@ class DemandActivity : AppCompatActivity(), LocationListener {
         productViewModel.productData.observe(this) { productData ->
             if (productData != null) {
                 val name = productData.name
-                Toast.makeText(this, "Product $name has been added successfully!", Toast.LENGTH_SHORT).show()
-//
+                val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                val snackbar = Snackbar.make(rootView, "Product created successfully!", Snackbar.LENGTH_LONG)
+                val snackbarView = snackbar.view
+                val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                textView.setTypeface(textView.typeface, Typeface.BOLD)
+                snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.green))
+                snackbar.show()
             }
         }
 
@@ -261,9 +274,21 @@ class DemandActivity : AppCompatActivity(), LocationListener {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == locationPermissionCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show()
+                val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                val snackbar = Snackbar.make(rootView, "Permission location granted!", Snackbar.LENGTH_LONG)
+                val snackbarView = snackbar.view
+                val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                textView.setTypeface(textView.typeface, Typeface.BOLD)
+                snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.green))
+                snackbar.show()
             } else {
-                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                val snackbar = Snackbar.make(rootView, "Permission location denied!", Snackbar.LENGTH_LONG)
+                val snackbarView = snackbar.view
+                val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                textView.setTypeface(textView.typeface, Typeface.BOLD)
+                snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                snackbar.show()
             }
         }
     }

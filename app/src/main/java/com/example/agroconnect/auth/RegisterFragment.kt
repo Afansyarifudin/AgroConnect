@@ -1,24 +1,17 @@
 package com.example.agroconnect.auth
 
-import android.content.Intent
 import android.os.Bundle
-import android.text.method.PasswordTransformationMethod
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.viewpager.widget.ViewPager
-import com.example.agroconnect.MainActivity
 import com.example.agroconnect.R
 import com.example.agroconnect.Result
-import com.example.agroconnect.SessionManager
-import com.google.android.material.tabs.TabLayout
 
 class RegisterFragment : Fragment() {
 
@@ -35,8 +28,8 @@ class RegisterFragment : Fragment() {
     ): View? {
         val rootView = inflater.inflate(R.layout.fragment_register, container, false)
         etName = rootView.findViewById(R.id.etName)
-        etEmail = rootView.findViewById(R.id.etEmail)
-        etPassword = rootView.findViewById(R.id.etPassword)
+        etEmail = rootView.findViewById(R.id.et_demname)
+        etPassword = rootView.findViewById(R.id.et_cropdate)
         btnRegister = rootView.findViewById(R.id.btnRegister)
         return rootView
     }
@@ -45,30 +38,6 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(RegisterViewModel::class.java)
-
-        val togglePassword: ImageView = view.findViewById(R.id.togglePasswordReg)
-        var passwordVisible = false // Initial state: password is hidden
-
-        togglePassword.setOnClickListener {
-            // Toggle password visibility
-            val passwordTransformationMethod = if (passwordVisible) {
-                PasswordTransformationMethod()
-            } else {
-                null // Setting null makes the password visible
-            }
-            etPassword.transformationMethod = passwordTransformationMethod
-
-            // Toggle eye icon drawable based on password visibility state
-            val iconDrawable = if (passwordVisible) {
-                R.drawable.ic_eye // Replace with the eye icon drawable when password is hidden
-            } else {
-                R.drawable.ic_eye // Replace with the eye-off icon drawable when password is visible
-            }
-            togglePassword.setImageResource(iconDrawable)
-
-            // Update password visibility state
-            passwordVisible = !passwordVisible
-        }
 
         btnRegister.setOnClickListener {
             val name = etName.text.toString()

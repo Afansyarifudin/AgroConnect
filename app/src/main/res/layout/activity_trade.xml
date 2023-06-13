@@ -67,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:text="Location"
                 android:textColor="@android:color/white" />
-
             <TextView
                 android:id="@+id/quantity"
                 android:layout_width="wrap_content"
@@ -77,5 +76,23 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/outlinedTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:hint="Email"
+        app:startIconDrawable="@drawable/baseline_email_24"
+        app:startIconTint="@color/purple_500"
+        app:layout_constraintTop_toBottomOf="@+id/tradeHistoryLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

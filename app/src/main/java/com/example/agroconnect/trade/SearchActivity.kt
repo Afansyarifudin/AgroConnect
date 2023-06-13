@@ -2,6 +2,7 @@ package com.example.agroconnect.trade
 
 import android.R
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.agroconnect.MainActivity
 import com.example.agroconnect.databinding.ActivitySearchBinding
 import com.example.agroconnect.datamodel.Category
+import com.google.android.material.snackbar.Snackbar
 
 
 class SearchActivity : AppCompatActivity() {
@@ -117,7 +119,13 @@ class SearchActivity : AppCompatActivity() {
                         selectedCategoryId = it.id // Update the selected category ID
                         if (selectedCategoryId != 0) {
                             performSearch(binding.searchView.query.toString())
-                            Toast.makeText(this@SearchActivity, "You've selected category: ${it.name}", Toast.LENGTH_SHORT).show()
+                            val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                            val snackbar = Snackbar.make(rootView, "You've selected category: ${it.name}", Snackbar.LENGTH_LONG)
+                            val snackbarView = snackbar.view
+                            val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                            textView.setTypeface(textView.typeface, Typeface.BOLD)
+                            snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.green))
+                            snackbar.show()
                             // Perform the search with the updated category filter
                         }
                     }
@@ -177,7 +185,13 @@ class SearchActivity : AppCompatActivity() {
             productViewModel.searchResultEmpty.observe(this) {searchResultEmpty ->
                 if (searchResultEmpty) {
                     val message = "Product not found"
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                    val snackbar = Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
+                    val snackbarView = snackbar.view
+                    val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                    textView.setTypeface(textView.typeface, Typeface.BOLD)
+                    snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                    snackbar.show()
                 }
             }
         } else {
@@ -195,7 +209,13 @@ class SearchActivity : AppCompatActivity() {
             productViewModel.searchResultEmpty.observe(this) {searchResultEmpty ->
                 if (searchResultEmpty) {
                     val message = "Product not found"
-                    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                    val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                    val snackbar = Snackbar.make(rootView, message, Snackbar.LENGTH_LONG)
+                    val snackbarView = snackbar.view
+                    val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                    textView.setTypeface(textView.typeface, Typeface.BOLD)
+                    snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                    snackbar.show()
                 }
             }
 
