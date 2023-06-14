@@ -12,13 +12,18 @@ Supply chain app of farmer. The game-changer that brings farmers, suppliers, and
 
 ## Features
 
-COMING SOON
+1. Find Supplies and Demand
+2. Create Supplies and Demand
+3. Find Potential Supplies in Maps
+4. Logistic Recommendation (COMING SOON)
+5. Transaction Flow (COMING SOON)
+6. Predict future potential supplies and demand in Maps (COMING SOON)
 
 ## Installation
 
 To use AgroConnect on your Android device, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/Afansyarifudin/AgroConnect.git`
+1. Clone the repository: ``git clone https://github.com/Afansyarifudin/AgroConnect.git``
 2. Open the project in Android Studio.
 3. Build the project to install any necessary dependencies.
 4. Connect your Android device to your computer.
