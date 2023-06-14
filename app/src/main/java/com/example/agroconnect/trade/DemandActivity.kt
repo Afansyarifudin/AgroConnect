@@ -32,6 +32,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
 import com.example.agroconnect.MainActivity
 import com.example.agroconnect.Result
+import com.example.agroconnect.auth.AuthActivity
 import com.example.agroconnect.databinding.ActivityDemandBinding
 import com.example.agroconnect.datamodel.Category
 import com.example.agroconnect.datamodel.LoginResponse
@@ -63,6 +64,14 @@ class DemandActivity : AppCompatActivity(), LocationListener {
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         sessionPreferences = getSharedPreferences("session", Context.MODE_PRIVATE)
+
+        if (!isSessionActive()) {
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
+
         val loginResponseJson = sessionPreferences.getString("loginResponse", null)
         val gson = Gson()
 
@@ -293,6 +302,10 @@ class DemandActivity : AppCompatActivity(), LocationListener {
                 snackbar.show()
             }
         }
+    }
+    private fun isSessionActive(): Boolean {
+        val loginResponseJson = sessionPreferences.getString("loginResponse", null)
+        return loginResponseJson != null
     }
 
 }

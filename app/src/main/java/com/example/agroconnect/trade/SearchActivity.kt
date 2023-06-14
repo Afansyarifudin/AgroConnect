@@ -162,6 +162,7 @@ class SearchActivity : AppCompatActivity() {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 performSearch(query)
+                binding.linearLayout.visibility = View.GONE
                 return true
             }
 

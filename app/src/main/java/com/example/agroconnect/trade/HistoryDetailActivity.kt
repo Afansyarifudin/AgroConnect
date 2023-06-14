@@ -7,11 +7,13 @@ import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Typeface
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.agroconnect.databinding.ActivityHistoryDetailActivityBinding
@@ -20,6 +22,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import java.io.File
 import java.io.FileOutputStream
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class HistoryDetailActivity : AppCompatActivity() {
 
@@ -29,6 +34,7 @@ class HistoryDetailActivity : AppCompatActivity() {
     private val REQUEST_CODE_PERMISSIONS = 1001
     private val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDetailActivityBinding.inflate(layoutInflater)
@@ -51,6 +57,8 @@ class HistoryDetailActivity : AppCompatActivity() {
             val tradeActivity = Intent(this, TradeActivity::class.java)
             startActivity(tradeActivity)
         }
+
+        binding.tvDateDetail.text = getCurrentDateTime()
 
         binding.tvButtonprint.setOnClickListener {
 //            if (checkPermissions()) {
@@ -127,5 +135,12 @@ class HistoryDetailActivity : AppCompatActivity() {
         val contentUri = Uri.fromFile(File(filePath))
         mediaScanIntent.data = contentUri
         applicationContext.sendBroadcast(mediaScanIntent)
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getCurrentDateTime(): String {
+        val currentDateTime = LocalDateTime.now()
+        val formatter = DateTimeFormatter.ofPattern("d MMMM yyyy, HH:mm 'WIB'", Locale.ENGLISH)
+        return currentDateTime.format(formatter)
     }
 }

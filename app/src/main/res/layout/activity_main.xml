@@ -148,8 +148,8 @@
             android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:fontFamily="@font/nunito"
+            android:text="Your Supplies"
             android:textColor="#000000"
-            android:text="Total Supplies"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -191,7 +191,7 @@
             android:layout_marginTop="6dp"
             android:layout_weight="1"
             android:fontFamily="@font/nunito"
-            android:text="Total Demand"
+            android:text="Your Demand"
             android:textColor="#000000"
 
             app:layout_constraintEnd_toEndOf="parent"

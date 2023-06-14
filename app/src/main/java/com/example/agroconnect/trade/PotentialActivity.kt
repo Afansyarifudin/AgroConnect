@@ -4,6 +4,7 @@ import android.R
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
@@ -20,6 +21,7 @@ import com.example.agroconnect.SessionManager
 import com.example.agroconnect.databinding.ActivityPotentialBinding
 import com.example.agroconnect.datamodel.Category
 import com.example.agroconnect.datamodel.LoginResponse
+import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 
 class PotentialActivity : AppCompatActivity() {
@@ -104,8 +106,15 @@ class PotentialActivity : AppCompatActivity() {
                         selectedCategoryId = it.id // Update the selected category ID
                         if (selectedCategoryId != 0) {
                             performSearch()
-                            Toast.makeText(this@PotentialActivity, "You've selected category: ${it.name}", Toast.LENGTH_SHORT).show()
-                            // Perform the search with the updated category filter
+                            val rootView = findViewById<View>(android.R.id.content) // Replace with the actual root view of your layout
+                            val snackbar = Snackbar.make(rootView, "You've selected category: ${it.name}", Snackbar.LENGTH_LONG)
+                            val snackbarView = snackbar.view
+                            val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                            textView.setTypeface(textView.typeface, Typeface.BOLD)
+                            snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.green))
+                            snackbar.show()
+                            binding.linearLayout.visibility = View.GONE
+
                         }
                     }
                 }

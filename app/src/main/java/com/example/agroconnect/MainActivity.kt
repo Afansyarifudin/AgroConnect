@@ -44,6 +44,12 @@ class MainActivity : AppCompatActivity() {
 //            return
 //        }
 
+        if (!isSessionActive()) {
+            val intent = Intent(this, AuthActivity::class.java)
+            startActivity(intent)
+            finish()
+            return
+        }
 
         networkConnectivityWatcher = NetworkConnectivityWatcher(this)
         networkConnectivityWatcher.startWatchingConnectivity()
@@ -85,10 +91,10 @@ class MainActivity : AppCompatActivity() {
 
 
         val greeting = when (currentHour) {
-            in 0..11 -> "Selamat pagi,"
-            in 12..15 -> "Selamat siang,"
-            in 16..18 -> "Selamat sore,"
-            else -> "Selamat malam,"
+            in 0..11 -> "Good morning,"
+            in 12..15 -> "Good afternoon,"
+            in 16..18 -> "Good afternoon,"
+            else -> "Good evening,"
         }
 
         binding.tvGreeting.text = "$greeting"
@@ -172,10 +178,10 @@ class MainActivity : AppCompatActivity() {
         finish()
     }
 
-//    private fun isSessionActive(): Boolean {
-//        val loginResponseJson = sessionPreferences.getString("loginResponse", null)
-//        return loginResponseJson != null
-//    }
+    private fun isSessionActive(): Boolean {
+        val loginResponseJson = sessionPreferences.getString("loginResponse", null)
+        return loginResponseJson != null
+    }
 
 
 }

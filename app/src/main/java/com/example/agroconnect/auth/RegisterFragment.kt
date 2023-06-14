@@ -1,5 +1,6 @@
 package com.example.agroconnect.auth
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Patterns
 import android.view.LayoutInflater
@@ -7,11 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.agroconnect.R
 import com.example.agroconnect.Result
+import com.google.android.material.snackbar.Snackbar
 
 class RegisterFragment : Fragment() {
 
@@ -49,7 +52,12 @@ class RegisterFragment : Fragment() {
             if (isValidEmail(email)) {
                 viewModel.register(name, email, password, role, avatar)
             } else {
-                Toast.makeText(activity, "Invalid email address", Toast.LENGTH_SHORT).show()
+                val snackbar = Snackbar.make(view, "Registration failed: Invalid email address!", Snackbar.LENGTH_LONG)
+                val snackbarView = snackbar.view
+                val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                textView.setTypeface(textView.typeface, Typeface.BOLD)
+                snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                snackbar.show()
             }
         }
 
@@ -60,30 +68,35 @@ class RegisterFragment : Fragment() {
 
                     val username = registerResponse?.username
 //                    val role = registerResponse?.role
-                    Toast.makeText(
-                        activity,
-                        "Hey, $username! Your registration is succesful. Please login using your email and password!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
+                    val snackbar = Snackbar.make(view, "Hey, $username! Your registration is succesful!", Snackbar.LENGTH_LONG)
+                    val snackbarView = snackbar.view
+                    val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                    textView.setTypeface(textView.typeface, Typeface.BOLD)
+                    snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.green))
+                    snackbar.show()
 
 
                 }
                 is Result.Error -> {
                     val exception = result.exception
                     // Handle registration error
-                    Toast.makeText(
-                        activity,
-                        "Registration failed: ${exception.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+
+                    val snackbar = Snackbar.make(view, "Registration failed: ${exception.message}", Snackbar.LENGTH_LONG)
+                    val snackbarView = snackbar.view
+                    val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                    textView.setTypeface(textView.typeface, Typeface.BOLD)
+                    snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                    snackbar.show()
                 }
                 else -> {
                     // Handle registration error
-                    Toast.makeText(
-                        activity,
-                        "Registration failed: Contact Administrator",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val snackbar = Snackbar.make(view, "Registration failed: Contact admin!", Snackbar.LENGTH_LONG)
+                    val snackbarView = snackbar.view
+                    val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+                    textView.setTypeface(textView.typeface, Typeface.BOLD)
+                    snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.red))
+                    snackbar.show()
                 }
             }
         }
