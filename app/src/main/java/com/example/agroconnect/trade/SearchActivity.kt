@@ -39,6 +39,8 @@ class SearchActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         binding = ActivitySearchBinding.inflate(layoutInflater)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         setContentView(binding.root)
 
         productViewModel = ViewModelProvider(this).get(ProductViewModel::class.java)

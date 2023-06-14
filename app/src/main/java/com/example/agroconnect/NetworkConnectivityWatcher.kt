@@ -8,6 +8,7 @@ import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.widget.Toast
+import com.google.android.material.snackbar.Snackbar
 
 class NetworkConnectivityWatcher(private val context: Context) {
 

@@ -3,9 +3,11 @@ package com.example.agroconnect.trade
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +23,7 @@ class SupItemsFragment : Fragment() {
     private var _binding: FragmentSupItemsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var sessionPreferences: SharedPreferences
     companion object {
         private const val ARG_PRODUCT_JSON = "arg_product_json"
 
@@ -40,6 +43,7 @@ class SupItemsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentSupItemsBinding.inflate(inflater, container, false)
+        sessionPreferences = requireContext().getSharedPreferences("session", Context.MODE_PRIVATE)
         return binding.root
     }
 
@@ -90,6 +94,10 @@ class SupItemsFragment : Fragment() {
 
         binding.btnOrder.setOnClickListener {
             val productJson = Gson().toJson(product)
+
+            sessionPreferences.edit().putString("productResponse", productJson).apply()
+            Log.d("Login", "Kalo disimpen jadi string: $productJson")
+
 
             val intent = Intent(requireContext(), TradeActivity::class.java)
             intent.putExtra("PRODUCT_JSON", productJson)

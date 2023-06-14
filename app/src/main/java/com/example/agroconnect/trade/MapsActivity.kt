@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.FragmentManager
@@ -35,6 +36,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         supportActionBar?.hide()
         val view = binding.root
         setContentView(view)

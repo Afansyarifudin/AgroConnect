@@ -39,6 +39,8 @@ class PotentialActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         binding = ActivityPotentialBinding.inflate(layoutInflater)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         setContentView(binding.root)
 
         sessionPreferences = getSharedPreferences("session", Context.MODE_PRIVATE)

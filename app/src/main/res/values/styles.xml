@@ -4,5 +4,11 @@
         <item name="android:focusable">true</item>
         <item name="android:focusableInTouchMode">true</item>
         <item name="android:clickable">true</item>
+
+    </style>
+    <style name="YourCustomTheme" parent="Theme.AppCompat.Light">
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+        <item name="android:navigationBarColor">@color/status_bar_color</item>
+
     </style>
 </resources>

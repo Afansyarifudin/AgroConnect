@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.Spanned
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -27,6 +28,8 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         binding = ActivityAuthBinding.inflate(layoutInflater)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         setContentView(binding.root)
 
         sharedPreferences = getSharedPreferences("session", MODE_PRIVATE)

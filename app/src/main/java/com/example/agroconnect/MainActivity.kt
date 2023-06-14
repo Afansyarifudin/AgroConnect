@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
@@ -25,12 +26,25 @@ class MainActivity : AppCompatActivity() {
     private lateinit var sessionPreferences: SharedPreferences
     private lateinit var networkConnectivityWatcher: NetworkConnectivityWatcher
     private lateinit var productViewModel: ProductViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         supportActionBar?.hide()
         binding = ActivityMainBinding.inflate(layoutInflater)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
         setContentView(binding.root)
+
+        sessionPreferences = getSharedPreferences("session", MODE_PRIVATE)
+
+//        if (!isSessionActive()) {
+//            val intent = Intent(this, AuthActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//            return
+//        }
+
+
         networkConnectivityWatcher = NetworkConnectivityWatcher(this)
         networkConnectivityWatcher.startWatchingConnectivity()
 
@@ -157,6 +171,11 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
         finish()
     }
+
+//    private fun isSessionActive(): Boolean {
+//        val loginResponseJson = sessionPreferences.getString("loginResponse", null)
+//        return loginResponseJson != null
+//    }
 
 
 }

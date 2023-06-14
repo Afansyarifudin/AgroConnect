@@ -47,6 +47,8 @@ class SuppliesActivity : AppCompatActivity(), LocationListener {
         super.onCreate(savedInstanceState)
         supportActionBar?.hide()
         binding = ActivitySuppliesBinding.inflate(layoutInflater)
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
+
         setContentView(binding.root)
 
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
