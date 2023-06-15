@@ -113,7 +113,7 @@ class PotentialActivity : AppCompatActivity() {
                             textView.setTypeface(textView.typeface, Typeface.BOLD)
                             snackbar.setBackgroundTint(resources.getColor(com.example.agroconnect.R.color.green))
                             snackbar.show()
-                            binding.linearLayout.visibility = View.GONE
+//                            binding.linearLayout.visibility = View.GONE
 
                         }
                     }
