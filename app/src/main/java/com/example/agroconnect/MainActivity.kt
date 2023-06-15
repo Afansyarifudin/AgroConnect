@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.agroconnect.auth.AuthActivity
 import com.example.agroconnect.databinding.ActivityMainBinding
 import com.example.agroconnect.databinding.ModalLayoutBinding
+import com.example.agroconnect.databinding.ModalLayoutFindBinding
 import com.example.agroconnect.datamodel.LoginResponse
 import com.example.agroconnect.trade.*
 import com.google.gson.Gson
@@ -121,21 +122,40 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvFinddemand.setOnClickListener{
-            val searchActivity = Intent(this, SearchActivity::class.java)
-            searchActivity.putExtra("isDemand", true)
-            startActivity(searchActivity)
+
+            val dialog = Dialog(this)
+            val dialogBinding = ModalLayoutFindBinding.inflate(layoutInflater)
+            dialog.setContentView(dialogBinding.root)
+
+
+            dialogBinding.btnFindSupplies.setOnClickListener {
+                val searchActivity = Intent(this, SearchActivity::class.java)
+                searchActivity.putExtra("isDemand", false)
+                startActivity(searchActivity)
+                dialog.dismiss()
+            }
+
+            dialogBinding.btnFindDemand.setOnClickListener {
+                val searchActivity = Intent(this, SearchActivity::class.java)
+                searchActivity.putExtra("isDemand", true)
+                startActivity(searchActivity)
+                dialog.dismiss()
+            }
+
+            dialog.show()
         }
 
-        binding.tvFindsupplies.setOnClickListener{
-            val searchActivity = Intent(this, SearchActivity::class.java)
-            searchActivity.putExtra("isDemand", false)
-            startActivity(searchActivity)
-        }
+//        binding.tvFindsupplies.setOnClickListener{
+//            val searchActivity = Intent(this, SearchActivity::class.java)
+//            searchActivity.putExtra("isDemand", false)
+//            startActivity(searchActivity)
+//        }
 
         binding.tvCreate.setOnClickListener {
             val dialog = Dialog(this)
             val dialogBinding = ModalLayoutBinding.inflate(layoutInflater)
             dialog.setContentView(dialogBinding.root)
+
 
             dialogBinding.btnCreateSupplies.setOnClickListener {
                 val demandIntent = Intent(this, DemandActivity::class.java)

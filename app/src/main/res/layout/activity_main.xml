@@ -7,38 +7,29 @@
     tools:context=".MainActivity">
 
 
-    <com.google.android.material.button.MaterialButton
+    <LinearLayout
         android:id="@+id/tv_tradehistory"
-        android:layout_width="280dp"
-        android:layout_height="86dp"
+        android:layout_width="290dp"
+        android:layout_height="105dp"
         android:layout_marginTop="450dp"
+        android:background="@drawable/button_trade"
         android:fontFamily="@font/nunito"
+        android:orientation="horizontal"
         android:text="Trade History"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <LinearLayout
         android:id="@+id/tv_findpotential"
-        android:layout_width="280dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="550dp"
+        android:layout_width="290dp"
+        android:layout_height="105dp"
+        android:layout_marginTop="570dp"
+        android:background="@drawable/button_potential"
         android:fontFamily="@font/nunito"
+        android:orientation="horizontal"
         android:text="Find Potential Supplies"
-        app:cornerRadius="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/tv_findsupplies"
-        android:layout_width="118dp"
-        android:layout_height="86dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="160dp"
-        android:fontFamily="@font/nunito"
-        android:text="FInd Supplies"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -88,12 +79,13 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Afan Herra" />
 
-    <Button
+    <LinearLayout
         android:id="@+id/tv_finddemand"
-        android:layout_width="118dp"
-        android:layout_height="86dp"
+        android:layout_width="130dp"
+        android:layout_height="185dp"
         android:layout_marginTop="250dp"
         android:layout_marginEnd="160dp"
+        android:background="@drawable/button_find"
         android:fontFamily="@font/nunito"
         android:text="Find Demand"
         app:cornerRadius="15dp"
@@ -101,14 +93,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <LinearLayout
         android:id="@+id/tv_create"
-        android:layout_width="118dp"
-        android:layout_height="184dp"
+        android:layout_width="130dp"
+        android:layout_height="185dp"
 
         android:layout_marginStart="160dp"
         android:layout_marginTop="250dp"
+        android:background="@drawable/button_create"
         android:fontFamily="@font/nunito"
+        android:orientation="horizontal"
         android:text="Create"
         app:cornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -171,32 +165,29 @@
             android:id="@+id/tv_totaldemandlive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="25dp"
             android:layout_marginTop="5dp"
+            android:layout_marginEnd="135dp"
             android:layout_weight="1"
             android:fontFamily="@font/nunito"
-            android:textColor="#000000"
 
             android:text="0"
+            android:textColor="#000000"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/tv_totalsupplieslive"
             app:layout_constraintTop_toBottomOf="@+id/tv_totaldemand" />
 
         <TextView
             android:id="@+id/tv_totaldemand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="70dp"
             android:layout_marginTop="6dp"
+            android:layout_marginEnd="65dp"
             android:layout_weight="1"
             android:fontFamily="@font/nunito"
             android:text="Your Demand"
-            android:textColor="#000000"
 
+            android:textColor="#000000"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.192"
-            app:layout_constraintStart_toEndOf="@+id/tv_totalsupplies"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,19 +9,19 @@
     android:padding="16dp">
 
     <Button
-        android:id="@+id/btn_create_supplies"
+        android:id="@+id/btn_find_supplies"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:fontFamily="@font/nunito"
-        android:text="Create Supplies"
+        android:text="Find Supplies"
         app:cornerRadius="45dp" />
 
     <Button
-        android:id="@+id/btn_create_demand"
+        android:id="@+id/btn_find_demand"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:fontFamily="@font/nunito"
-        android:text="Create Demand"
+        android:text="Find Demand"
         app:cornerRadius="45dp" />
 
 </LinearLayout>
